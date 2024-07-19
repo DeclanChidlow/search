@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta property="og:site_name" content="Vale Rocks" />
+		<meta name="author" content="Declan Chidlow" />
+		<meta property="og:locale" content="en_AU" />
+		<meta property="og:url" content="https://search.vale.rocks" />
+		<title>Search | Vale.Rocks</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="search-container">
+			<h1>Search</h1>
+			<form id="search-form">
+				<input type="text" id="search-input" autocomplete="off" placeholder="Search..." />
+				<button type="submit" id="search-button" class="icons">search</button>
+			</form>
+
+			<div class="default-engine">
+				<label for="engine-select">Search Engine:</label>
+				<select id="engine-select">
+					<option value="https://www.google.com/search?q=">Google</option>
+					<option value="https://www.bing.com/search?q=">Bing</option>
+					<option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+					<option value="https://www.startpage.com/do/search?query=">StartPage</option>
+					<option value="https://search.brave.com/search?q=">Brave</option>
+					<option value="https://www.ecosia.org/search?q=">Ecosia</option>
+				</select>
+			</div>
+
+			<details>
+				<summary>All Available Bangs</summary>
+				<ul id="all-bangs-list"></ul>
+			</details>
+		</div>
+
+		<footer>
+			<p><a href="https://github.com/DeclanChidlow/search">Source Code</a></p>
+			<hr />
+			<p>Built by <a href="https://vale.rocks">Vale</a></p>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>

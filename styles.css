@@ -1,0 +1,87 @@
+@import url("https://vale.rocks/styles/variables/colours.css");
+@import url("https://vale.rocks/styles/base/reset.css");
+@import url("https://vale.rocks/styles/type/headers.css");
+@import url("https://vale.rocks/styles/type/links.css");
+@import url("https://vale.rocks/styles/type/type.css");
+@import url("https://vale.rocks/styles/components/input.css");
+
+@font-face {
+	font-family: "Lexend";
+	src: url("https://vale.rocks/assets/typefaces/Lexend/Lexend-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Fira Code";
+	src: url("https://vale.rocks/assets/typefaces/Fira_Code/FiraCode-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Material Symbols";
+	src: url("https://vale.rocks/assets/typefaces/Material_Symbols_Sharp/MaterialSymbolsSharp-Regular.ttf");
+}
+
+.icons {
+	font-family: "Material Symbols";
+	user-select: none;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
+	text-align: center;
+	color: light-dark(var(--black), var(--bright_white));
+	background: light-dark(var(--bright_white), var(--black));
+	transition: 0.25s;
+	padding: 0.5rem;
+}
+.search-container {
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	gap: 1rem;
+	margin: auto;
+	min-width: 50vw;
+
+	#search-form {
+		display: flex;
+		flex-direction: row;
+		gap: 0;
+
+		#search-input {
+			width: 100%;
+		}
+	}
+
+	.default-engine {
+		display: flex;
+		align-self: center;
+		align-items: center;
+		gap: 1rem;
+	}
+}
+
+#bang-popup {
+	display: absolute;
+}
+
+footer {
+	display: flex;
+	align-self: center;
+	align-items: center;
+	font-family: "Fira Code";
+	font-size: 0.75rem;
+
+	p {
+		margin: 0;
+	}
+
+	hr {
+		all: unset;
+		height: 1rem;
+		width: 1px;
+		margin: 0 0.5rem;
+		background: var(--bright_grey);
+	}
+}
