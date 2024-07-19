@@ -70,6 +70,11 @@ function loadSelectedEngine() {
 function performSearch(query) {
 	let searchUrl = engineSelect.value;
 
+	if (bangPatterns.hasOwnProperty(query)) {
+		window.location.href = new URL(bangPatterns[query].url).origin;
+		return;
+	}
+
 	for (const [bang, { url }] of Object.entries(bangPatterns)) {
 		if (query.startsWith(bang + " ")) {
 			searchUrl = url;
