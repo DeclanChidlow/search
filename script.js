@@ -39,17 +39,14 @@ const bangPatterns = {
 	"!p": { url: "https://www.printables.com/search/models?q=", description: "Printables" },
 	"!pm": { url: "https://mail.proton.me/u/0/almost-all-mail#keyword=", description: "Proton Mail" },
 	"!pd": { url: "https://drive.proton.me/u/0/search#q=", description: "Proton Drive" },
-	"!pd": { url: "https://drive.proton.me/u/0/search#q=", description: "Proton Drive" },
 };
 
-// Populate all bangs list
 for (const [bang, { description }] of Object.entries(bangPatterns)) {
 	const li = document.createElement("li");
 	li.textContent = `${bang}: ${description}`;
 	allBangsList.appendChild(li);
 }
 
-// Function to get URL parameters
 function getUrlParameter(name) {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -57,12 +54,12 @@ function getUrlParameter(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-// Function to save the selected engine to localStorage
 function saveSelectedEngine() {
 	localStorage.setItem("selectedEngine", engineSelect.value);
 }
 
-// Function to load the selected engine from localStorage
+engineSelect.addEventListener("change", saveSelectedEngine);
+
 function loadSelectedEngine() {
 	const savedEngine = localStorage.getItem("selectedEngine");
 	if (savedEngine) {
@@ -70,24 +67,8 @@ function loadSelectedEngine() {
 	}
 }
 
-// Set initial search input value from URL parameter and load saved engine
-window.addEventListener("load", () => {
-	const searchQuery = getUrlParameter("search");
-	if (searchQuery) {
-		searchInput.value = searchQuery;
-		updateBangSuggestions(searchQuery);
-	}
-	loadSelectedEngine();
-});
-
-// Save selected engine when changed
-engineSelect.addEventListener("change", saveSelectedEngine);
-
-// Search
-searchForm.addEventListener("submit", function (e) {
-	e.preventDefault();
-	let query = searchInput.value.trim(),
-		searchUrl = engineSelect.value;
+function performSearch(query) {
+	let searchUrl = engineSelect.value;
 
 	for (const [bang, { url }] of Object.entries(bangPatterns)) {
 		if (query.startsWith(bang + " ")) {
@@ -98,9 +79,24 @@ searchForm.addEventListener("submit", function (e) {
 	}
 
 	window.location.href = searchUrl + encodeURIComponent(query);
+}
+
+window.addEventListener("load", () => {
+	const searchQuery = getUrlParameter("search");
+	loadSelectedEngine();
+
+	if (searchQuery) {
+		searchInput.value = searchQuery;
+		performSearch(searchQuery);
+	}
 });
 
-// Keyboard shortcuts
+searchForm.addEventListener("submit", function (e) {
+	e.preventDefault();
+	let query = searchInput.value.trim();
+	performSearch(query);
+});
+
 document.addEventListener("keydown", (e) => {
 	if (e.key === "/" && document.activeElement !== searchInput) {
 		e.preventDefault();
