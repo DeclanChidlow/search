@@ -36,7 +36,7 @@ const bangPatterns = {
 	"!html": { url: "https://developer.mozilla.org/en-US/search?topic=html&q=", description: "MDN HTML" },
 	"!css": { url: "https://developer.mozilla.org/en-US/search?topic=css&q=", description: "MDN CSS" },
 	"!js": { url: "https://developer.mozilla.org/en-US/search?topic=js&q=", description: "MDN JavaScript" },
-	"!npm": { url: "https://www.npmjs.com/search?q=", description: "npm packages" },
+	"!npm": { url: "https://www.npmjs.com/search?q=", description: "NPM packages" },
 	"!bs": { url: "https://bsky.app/search?q=", description: "Bluesky" },
 	"!gh": { url: "https://github.com/search?q=", description: "GitHub" },
 	"!lw": { url: "https://www.lesswrong.com/search?query=", description: "LessWrong" },
@@ -45,9 +45,12 @@ const bangPatterns = {
 	"!aur": { url: "https://aur.archlinux.org/packages?K=", description: "Arch User Repository" },
 	"!aw": { url: "https://wiki.archlinux.org/index.php?search=", description: "Arch Wiki" },
 	"!nixpkg": { url: "https://search.nixos.org/packages?query=", description: "Nix Packages" },
+	"!nixopt": { url: "https://search.nixos.org/options?query=", description: "Nix Options" },
 	"!p": { url: "https://www.printables.com/search/models?q=", description: "Printables" },
 	"!pm": { url: "https://mail.proton.me/u/0/almost-all-mail#keyword=", description: "Proton Mail" },
 	"!pd": { url: "https://drive.proton.me/u/0/search#q=", description: "Proton Drive" },
+	"!pc": { url: "https://calendar.proton.me/u/0/search#keyword=", description: "Proton Calendar" },
+	"!sym": { url: "https://symbl.cc/search/?q=", description: "SYMBL" },
 };
 
 for (const [bang, { description }] of Object.entries(bangPatterns)) {
