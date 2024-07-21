@@ -1,7 +1,10 @@
-const searchForm = document.getElementById("search-form"),
+const scriptEnabled = document.getElementById("script-enabled"),
+	searchForm = document.getElementById("search-form"),
 	searchInput = document.getElementById("search-input"),
 	engineSelect = document.getElementById("engine-select"),
 	allBangsList = document.getElementById("all-bangs-list");
+
+scriptEnabled.style.display = "flex";
 
 const bangPatterns = {
 	"!g": { url: "https://www.google.com/search?q=", description: "Google Search" },

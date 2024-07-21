@@ -14,35 +14,41 @@
 	<body>
 		<div class="search-container">
 			<h1>Search</h1>
-			<form id="search-form">
-				<input type="text" id="search-input" autocomplete="off" placeholder="Search..." />
-				<button type="submit" id="search-button" class="icons">search</button>
-			</form>
+			<noscript>
+				<p>This app requires JavaScript, but it isn't enabled in your browser.</p>
+			</noscript>
 
-			<div class="default-engine">
-				<label for="engine-select">Search Engine:</label>
-				<select id="engine-select">
-					<option value="https://www.google.com/search?q=">Google</option>
-					<option value="https://www.bing.com/search?q=">Bing</option>
-					<option value="https://start.duckduckgo.com/?q=">DuckDuckGo</option>
-					<option value="https://www.startpage.com/do/search?query=">StartPage</option>
-					<option value="https://search.brave.com/search?q=">Brave</option>
-					<option value="https://www.ecosia.org/search?q=">Ecosia</option>
-					<option value="https://you.com/search?q=">You</option>
-					<option value="https://yep.com/web?q=">Yep</option>
-					<option value="https://www.perplexity.ai/search?q=">Perplexity</option>
-					<option value="https://swisscows.com/web?query=">Swisscows</option>
-					<option value="https://kagi.com/search?q=">Kagi</option>
-					<option value="https://www.ask.com/web?q=">Ask</option>
-					<option value="https://www.qwant.com/?q=">Qwant</option>
-					<option value="https://exa.ai/search?q=">Exa</option>
-				</select>
+			<div id="script-enabled">
+				<form id="search-form">
+					<input type="text" id="search-input" autocomplete="off" placeholder="Search..." />
+					<button type="submit" id="search-button" class="icons">search</button>
+				</form>
+
+				<div class="default-engine">
+					<label for="engine-select">Search Engine:</label>
+					<select id="engine-select">
+						<option value="https://www.google.com/search?q=">Google</option>
+						<option value="https://www.bing.com/search?q=">Bing</option>
+						<option value="https://start.duckduckgo.com/?q=">DuckDuckGo</option>
+						<option value="https://www.startpage.com/do/search?query=">StartPage</option>
+						<option value="https://search.brave.com/search?q=">Brave</option>
+						<option value="https://www.ecosia.org/search?q=">Ecosia</option>
+						<option value="https://you.com/search?q=">You</option>
+						<option value="https://yep.com/web?q=">Yep</option>
+						<option value="https://www.perplexity.ai/search?q=">Perplexity</option>
+						<option value="https://swisscows.com/web?query=">Swisscows</option>
+						<option value="https://kagi.com/search?q=">Kagi</option>
+						<option value="https://www.ask.com/web?q=">Ask</option>
+						<option value="https://www.qwant.com/?q=">Qwant</option>
+						<option value="https://exa.ai/search?q=">Exa</option>
+					</select>
+				</div>
+
+				<details>
+					<summary>All Available Bangs</summary>
+					<ul id="all-bangs-list"></ul>
+				</details>
 			</div>
-
-			<details>
-				<summary>All Available Bangs</summary>
-				<ul id="all-bangs-list"></ul>
-			</details>
 		</div>
 
 		<footer>
