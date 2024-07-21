@@ -19,6 +19,7 @@ const bangPatterns = {
 	"!k": { url: "https://kagi.com/search?q=", description: "Kagi" },
 	"!ask": { url: "https://www.ask.com/web?q=", description: "Ask" },
 	"!q": { url: "https://www.qwant.com/?q=", description: "Qwant" },
+	"!exa": { url: "https://exa.ai/search?q=", description: "Exa" },
 	"!sp": { url: "https://www.startpage.com/do/search?query=", description: "StartPage" },
 	"!br": { url: "https://search.brave.com/search?q=", description: "Brave Search" },
 	"!eco": { url: "https://www.ecosia.org/search?q=", description: "Ecosia" },
