@@ -2,7 +2,7 @@ const scriptEnabled = document.getElementById("script-enabled"),
 	searchForm = document.getElementById("search-form"),
 	searchInput = document.getElementById("search-input"),
 	engineSelect = document.getElementById("engine-select"),
-	allBangsList = document.getElementById("all-bangs-list");
+	bangsList = document.getElementById("bangs-list");
 
 scriptEnabled.style.display = "flex";
 
@@ -59,7 +59,7 @@ const bangPatterns = {
 for (const [bang, { desc }] of Object.entries(bangPatterns)) {
 	const li = document.createElement("li");
 	li.textContent = `${bang}: ${desc}`;
-	allBangsList.appendChild(li);
+	bangsList.appendChild(li);
 }
 
 function getUrlParameter(name) {
