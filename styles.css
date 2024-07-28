@@ -2,7 +2,6 @@
 @import url("https://vale.rocks/styles/base/reset.css");
 @import url("https://vale.rocks/styles/type/headers.css");
 @import url("https://vale.rocks/styles/type/links.css");
-@import url("https://vale.rocks/styles/type/type.css");
 @import url("https://vale.rocks/styles/components/input.css");
 
 @font-face {
@@ -33,6 +32,7 @@ body {
 	text-align: center;
 	color: light-dark(var(--black), var(--bright_white));
 	background: light-dark(var(--bright_white), var(--black));
+	font-family: "Lexend", sans-serif;
 	transition: 0.25s;
 	padding: 0.5rem;
 }
