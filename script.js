@@ -56,15 +56,18 @@ const bangPatterns = {
 	"!sym": { url: "https://symbl.cc/search/?q=", desc: "SYMBL" },
 };
 
-for (const [bang, { desc }] of Object.entries(bangPatterns)) {
-	const li = document.createElement("li");
-	li.textContent = `${bang}: ${desc}`;
-	bangsList.appendChild(li);
+function createBangList() {
+	const fragment = document.createDocumentFragment();
+	Object.entries(bangPatterns).forEach(([bang, { desc }]) => {
+		const li = document.createElement("li");
+		li.textContent = `${bang}: ${desc}`;
+		fragment.appendChild(li);
+	});
+	bangsList.appendChild(fragment);
 }
 
 function getUrlParameter(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	const regex = new RegExp(`[?&]${name}=([^&#]*)`),
 		results = regex.exec(location.search);
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
@@ -72,8 +75,6 @@ function getUrlParameter(name) {
 function saveSelectedEngine() {
 	localStorage.setItem("selectedEngine", engineSelect.value);
 }
-
-engineSelect.addEventListener("change", saveSelectedEngine);
 
 function loadSelectedEngine() {
 	const savedEngine = localStorage.getItem("selectedEngine");
@@ -91,37 +92,45 @@ function performSearch(query) {
 	}
 
 	for (const [bang, { url }] of Object.entries(bangPatterns)) {
-		if (query.startsWith(bang + " ")) {
+		if (query.startsWith(`${bang} `)) {
 			searchUrl = url;
 			query = query.slice(bang.length + 1);
 			break;
 		}
 	}
 
-	window.location.href = searchUrl + encodeURIComponent(query);
+	window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
 }
 
-window.addEventListener("load", () => {
-	const searchQuery = getUrlParameter("search");
-	loadSelectedEngine();
+function setupEventListeners() {
+	engineSelect.addEventListener("change", saveSelectedEngine);
 
+	searchForm.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const query = searchInput.value.trim();
+		performSearch(query);
+	});
+
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "/" && document.activeElement !== searchInput) {
+			e.preventDefault();
+			searchInput.focus();
+		} else if (e.key === "Escape" && document.activeElement === searchInput) {
+			searchInput.value = "";
+		}
+	});
+}
+
+function init() {
+	createBangList();
+	loadSelectedEngine();
+	setupEventListeners();
+
+	const searchQuery = getUrlParameter("search");
 	if (searchQuery) {
 		searchInput.value = searchQuery;
 		performSearch(searchQuery);
 	}
-});
+}
 
-searchForm.addEventListener("submit", function (e) {
-	e.preventDefault();
-	let query = searchInput.value.trim();
-	performSearch(query);
-});
-
-document.addEventListener("keydown", (e) => {
-	if (e.key === "/" && document.activeElement !== searchInput) {
-		e.preventDefault();
-		searchInput.focus();
-	} else if (e.key === "Escape" && document.activeElement === searchInput) {
-		searchInput.value = "";
-	}
-});
+document.addEventListener("DOMContentLoaded", init);
