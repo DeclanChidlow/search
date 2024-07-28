@@ -9,7 +9,7 @@ scriptEnabled.style.display = "flex";
 const bangPatterns = {
 	"!g": { url: "https://www.google.com/search?q=", desc: "Google Search" },
 	"!gf": { url: "https://fonts.google.com/?query=", desc: "Google Fonts" },
-	"!gi": { url: "https://fonts.google.com/icons?icon.query=", desc: "Google Icons" },
+	"!gi": { url: "https://fonts.google.com/icons?icon.query=", base: "https://fonts.google.com/icons", desc: "Google Icons" },
 	"!gm": { url: "https://www.google.com.au/maps/search/", desc: "Google Maps" },
 	"!yt": { url: "https://www.youtube.com/search?q=", desc: "YouTube" },
 	"!ytm": { url: "https://music.youtube.com/search?q=", desc: "YouTube Music" },
@@ -27,7 +27,7 @@ const bangPatterns = {
 	"!br": { url: "https://search.brave.com/search?q=", desc: "Brave Search" },
 	"!eco": { url: "https://www.ecosia.org/search?q=", desc: "Ecosia" },
 	"!bc": { url: "https://bandcamp.com/search?q=", desc: "Bandcamp" },
-	"!hn": { url: "https://hn.algolia.com/?q=", desc: "Hacker News" },
+	"!hn": { url: "https://hn.algolia.com/?q=", base: "https://news.ycombinator.com", desc: "Hacker News" },
 	"!w": { url: "https://wikipedia.org/w/index.php?search=", desc: "Wikipedia" },
 	"!ud": { url: "https://www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
 	"!ia": { url: "https://archive.org/search?query=", desc: "Internet Archive" },
@@ -36,9 +36,9 @@ const bangPatterns = {
 	"!rs": { url: "https://www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
 	"!ciu": { url: "https://caniuse.com/?search=", desc: "Can I Use" },
 	"!mdn": { url: "https://developer.mozilla.org/en-US/search?q=", desc: "MDN Web Docs" },
-	"!html": { url: "https://developer.mozilla.org/en-US/search?topic=html&q=", desc: "MDN HTML" },
-	"!css": { url: "https://developer.mozilla.org/en-US/search?topic=css&q=", desc: "MDN CSS" },
-	"!js": { url: "https://developer.mozilla.org/en-US/search?topic=js&q=", desc: "MDN JavaScript" },
+	"!html": { url: "https://developer.mozilla.org/en-US/search?topic=html&q=", base: "https://developer.mozilla.org/en-US/docs/Web/HTML", desc: "MDN HTML" },
+	"!css": { url: "https://developer.mozilla.org/en-US/search?topic=css&q=", base: "https://developer.mozilla.org/en-US/docs/Web/CSS", desc: "MDN CSS" },
+	"!js": { url: "https://developer.mozilla.org/en-US/search?topic=js&q=", base: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", desc: "MDN JavaScript" },
 	"!npm": { url: "https://www.npmjs.com/search?q=", desc: "NPM packages" },
 	"!bs": { url: "https://bsky.app/search?q=", desc: "Bluesky" },
 	"!gh": { url: "https://github.com/search?q=", desc: "GitHub" },
@@ -48,7 +48,7 @@ const bangPatterns = {
 	"!aur": { url: "https://aur.archlinux.org/packages?K=", desc: "Arch User Repository" },
 	"!aw": { url: "https://wiki.archlinux.org/index.php?search=", desc: "Arch Wiki" },
 	"!nixpkg": { url: "https://search.nixos.org/packages?query=", desc: "Nix Packages" },
-	"!nixopt": { url: "https://search.nixos.org/options?query=", desc: "Nix Options" },
+	"!nixopt": { url: "https://search.nixos.org/options?query=", base: "https://search.nixos.org/options", desc: "Nix Options" },
 	"!p": { url: "https://www.printables.com/search/models?q=", desc: "Printables" },
 	"!pm": { url: "https://mail.proton.me/u/0/almost-all-mail#keyword=", desc: "Proton Mail" },
 	"!pd": { url: "https://drive.proton.me/u/0/search#q=", desc: "Proton Drive" },
@@ -87,7 +87,8 @@ function performSearch(query) {
 	let searchUrl = engineSelect.value;
 
 	if (bangPatterns.hasOwnProperty(query)) {
-		window.location.href = new URL(bangPatterns[query].url).origin;
+		const { base, url } = bangPatterns[query];
+		window.location.href = base || new URL(url).origin;
 		return;
 	}
 
@@ -99,7 +100,11 @@ function performSearch(query) {
 		}
 	}
 
-	window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
+	if (!query && bangPatterns[searchUrl]?.base) {
+		window.location.href = bangPatterns[searchUrl].base;
+	} else {
+		window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
+	}
 }
 
 function setupEventListeners() {
