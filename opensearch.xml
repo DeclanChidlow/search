@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Vale Search</ShortName>
-    <Description>Search the web with Vale's Search wrapper.</Description>
-    <InputEncoding>UTF-8</InputEncoding>
-    <Url type="text/html" method="get" template="https://search.vale.rocks?search={searchTerms}"/>
+	<ShortName>Vale Search</ShortName>
+	<Description>Search the web with Vale's search wrapper.</Description>
+	<Tags>web search wrapper Vale</Tags>
+	<Contact>search@vale.rocks</Contact>
+	<Url type="text/html" template="https://search.vale.rocks?search={searchTerms}"/>
+	<Url type="application/opensearchdescription+xml" rel="self" template="https://search.vale.rocks/opensearch.xml"/>
+	<LongName>Vale's Search Engine Wrapper</LongName>
+	<Developer>Declan Chidlow (Vale)</Developer>
+	<AdultContent>true</AdultContent>
+	<Language>*</Language>
+	<InputEncoding>UTF-8</InputEncoding>
+	<OutputEncoding>UTF-8</OutputEncoding>
 </OpenSearchDescription>
