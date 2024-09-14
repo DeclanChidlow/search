@@ -10,7 +10,7 @@ const bangPatterns = {
 	"!g": { url: "https://www.google.com/search?q=", desc: "Google Search" },
 	"!gf": { url: "https://fonts.google.com/?query=", desc: "Google Fonts" },
 	"!gi": { url: "https://fonts.google.com/icons?icon.query=", base: "https://fonts.google.com/icons", desc: "Google Icons" },
-	"!gm": { url: "https://www.google.com.au/maps/search/", desc: "Google Maps" },
+	"!gm": { url: "https://www.google.com/maps/search/", base: "https://google.com/maps", desc: "Google Maps" },
 	"!gs": { url: "https://scholar.google.com/scholar?q=", desc: "Google Scholar" },
 	"!yt": { url: "https://www.youtube.com/search?q=", desc: "YouTube" },
 	"!ytm": { url: "https://music.youtube.com/search?q=", desc: "YouTube Music" },
@@ -30,7 +30,7 @@ const bangPatterns = {
 	"!amz": { url: "https://www.amazon.com/s?k=", desc: "Amazon" },
 	"!ebay": { url: "https://www.ebay.com/sch/?_nkw=", desc: "eBay" },
 	"!bc": { url: "https://bandcamp.com/search?q=", desc: "Bandcamp" },
-	"!hn": { url: "https://hn.algolia.com/?q=", base: "https://news.ycombinator.com", desc: "Hacker News" },
+	"!hn": { url: "https://hn.trieve.ai/?q=", base: "https://news.ycombinator.com", desc: "Hacker News" },
 	"!w": { url: "https://wikipedia.org/w/index.php?search=", desc: "Wikipedia" },
 	"!ud": { url: "https://www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
 	"!ia": { url: "https://archive.org/search?query=", desc: "Internet Archive" },
@@ -60,7 +60,7 @@ const bangPatterns = {
 	"!pm": { url: "https://mail.proton.me/u/0/almost-all-mail#keyword=", desc: "Proton Mail" },
 	"!pd": { url: "https://drive.proton.me/u/0/search#q=", desc: "Proton Drive" },
 	"!pc": { url: "https://calendar.proton.me/u/0/search#keyword=", desc: "Proton Calendar" },
-	"!sym": { url: "https://symbl.cc/search/?q=", desc: "SYMBL" },
+	"!sym": { url: "https://symbl.cc/en/search/?q=", desc: "SYMBL" },
 };
 
 function createBangList() {

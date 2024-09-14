@@ -36,7 +36,8 @@ body {
 	transition: 0.25s;
 	padding: 0.5rem;
 }
-.search-container {
+
+main{
 	display: flex;
 	flex-direction: column;
 	justify-items: center;
