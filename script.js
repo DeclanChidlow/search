@@ -109,25 +109,48 @@ function performSearch(query) {
 	let searchUrl = engineSelect.value;
 	let isSnap = false;
 
-	if (query.startsWith("@")) {
-		const [snapCode, ...rest] = query.slice(1).split(" ");
-		const bangKey = `!${snapCode}`;
-		if (bangPatterns.hasOwnProperty(bangKey)) {
-			const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
-			if (baseUrl) {
-				searchUrl = `${engineSelect.value}site:${baseUrl} `;
-				query = rest.join(" ");
-				isSnap = true;
+	function processBangOrSnap(code, isSnap) {
+		if (isSnap) {
+			const bangKey = `!${code}`;
+			if (bangPatterns.hasOwnProperty(bangKey)) {
+				const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
+				if (baseUrl) {
+					return `${engineSelect.value}site:${baseUrl} `;
+				}
+			}
+		} else {
+			const bangKey = `!${code}`;
+			if (bangPatterns.hasOwnProperty(bangKey)) {
+				return bangPatterns[bangKey].url;
 			}
 		}
+		return null;
 	}
 
-	if (!isSnap) {
-		for (const [bang, { url }] of Object.entries(bangPatterns)) {
-			if (query.startsWith(`${bang} `)) {
-				searchUrl = url;
-				query = query.slice(bang.length + 1);
-				break;
+	if (query.startsWith("!") || query.startsWith("@")) {
+		isSnap = query.startsWith("@");
+		const parts = query.slice(1).split(" ");
+		bangOrSnap = parts[0];
+		bangOrSnapQuery = parts.slice(1).join(" ");
+
+		const result = processBangOrSnap(bangOrSnap, isSnap);
+		if (result) {
+			searchUrl = result;
+			query = bangOrSnapQuery;
+		}
+	} else {
+		const parts = query.split(" ");
+		const lastPart = parts[parts.length - 1];
+
+		if (lastPart.startsWith("!") || lastPart.startsWith("@")) {
+			isSnap = lastPart.startsWith("@");
+			bangOrSnap = lastPart.slice(1);
+			bangOrSnapQuery = parts.slice(0, -1).join(" ");
+
+			const result = processBangOrSnap(bangOrSnap, isSnap);
+			if (result) {
+				searchUrl = result;
+				query = bangOrSnapQuery;
 			}
 		}
 	}
