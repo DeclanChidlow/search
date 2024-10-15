@@ -4,7 +4,7 @@
 	<Description>Search the web with Vale's search wrapper.</Description>
 	<Tags>web search wrapper Vale</Tags>
 	<Contact>search@vale.rocks</Contact>
-	<Url type="text/html" template="https://search.vale.rocks?search={searchTerms}"/>
+	<Url type="text/html" template="https://search.vale.rocks?q={searchTerms}"/>
 	<Url type="application/opensearchdescription+xml" rel="self" template="https://search.vale.rocks/opensearch.xml"/>
 	<LongName>Vale's Search Engine Wrapper</LongName>
 	<Developer>Declan Chidlow (Vale)</Developer>

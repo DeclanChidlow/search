@@ -186,7 +186,7 @@ function init() {
 	loadSelectedEngine();
 	setupEventListeners();
 
-	const searchQuery = getUrlParameter("search");
+	const searchQuery = getUrlParameter("q");
 	if (searchQuery) {
 		searchInput.value = searchQuery;
 		performSearch(searchQuery);
