@@ -95,20 +95,40 @@ function loadSelectedEngine() {
 	}
 }
 
+function getBaseUrl(url) {
+	try {
+		const urlObj = new URL(url);
+		return urlObj.origin;
+	} catch (e) {
+		console.error("Invalid URL:", url);
+		return null;
+	}
+}
+
 function performSearch(query) {
 	let searchUrl = engineSelect.value;
+	let isSnap = false;
 
-	if (bangPatterns.hasOwnProperty(query)) {
-		const { base, url } = bangPatterns[query];
-		window.location.href = base || new URL(url).origin;
-		return;
+	if (query.startsWith("@")) {
+		const [snapCode, ...rest] = query.slice(1).split(" ");
+		const bangKey = `!${snapCode}`;
+		if (bangPatterns.hasOwnProperty(bangKey)) {
+			const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
+			if (baseUrl) {
+				searchUrl = `${engineSelect.value}site:${baseUrl} `;
+				query = rest.join(" ");
+				isSnap = true;
+			}
+		}
 	}
 
-	for (const [bang, { url }] of Object.entries(bangPatterns)) {
-		if (query.startsWith(`${bang} `)) {
-			searchUrl = url;
-			query = query.slice(bang.length + 1);
-			break;
+	if (!isSnap) {
+		for (const [bang, { url }] of Object.entries(bangPatterns)) {
+			if (query.startsWith(`${bang} `)) {
+				searchUrl = url;
+				query = query.slice(bang.length + 1);
+				break;
+			}
 		}
 	}
 
