@@ -66,6 +66,7 @@ const bangPatterns = {
 	"!sym": { url: "https://symbl.cc/en/search/?q=", desc: "SYMBL" },
 	"!mm": { url: "https://www.merklemap.com/search?query=", desc: "Merklemap" },
 	"!lb": { url: "https://letterboxd.com/search/", desc: "Letterboxd" },
+	"!mar": { url: "https://search.marginalia.nu/search?query=", desc: "Marginalia" },
 };
 
 function createBangList() {
