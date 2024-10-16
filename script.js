@@ -127,8 +127,19 @@ function performSearch(query, defaultEngine) {
 		}
 	}
 
-	if (!query && bangPatterns[searchUrl]?.base) {
-		window.location.href = bangPatterns[searchUrl].base;
+	if (!query.trim()) {
+		const bangKey = Object.keys(bangPatterns).find((key) => bangPatterns[key].url === searchUrl);
+
+		if (bangKey) {
+			if (bangPatterns[bangKey].base) {
+				window.location.href = bangPatterns[bangKey].base;
+			} else {
+				const urlParts = searchUrl.split("/");
+				window.location.href = urlParts.slice(0, 3).join("/");
+			}
+		} else {
+			window.location.href = new URL(searchUrl).origin;
+		}
 	} else {
 		window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
 	}
