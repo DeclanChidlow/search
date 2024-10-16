@@ -1,11 +1,3 @@
-const scriptEnabled = document.getElementById("script-enabled"),
-	searchForm = document.getElementById("search-form"),
-	searchInput = document.getElementById("search-input"),
-	engineSelect = document.getElementById("engine-select"),
-	bangsList = document.getElementById("bangs-list");
-
-scriptEnabled.style.display = "flex";
-
 const bangPatterns = {
 	"!g": { url: "https://www.google.com/search?q=", desc: "Google Search" },
 	"!gf": { url: "https://fonts.google.com/?query=", desc: "Google Fonts" },
@@ -68,32 +60,10 @@ const bangPatterns = {
 	"!lb": { url: "https://letterboxd.com/search/", desc: "Letterboxd" },
 	"!mar": { url: "https://search.marginalia.nu/search?query=", desc: "Marginalia" },
 };
-
-function createBangList() {
-	const fragment = document.createDocumentFragment();
-	Object.entries(bangPatterns).forEach(([bang, { desc }]) => {
-		const li = document.createElement("li");
-		li.textContent = `${bang}: ${desc}`;
-		fragment.appendChild(li);
-	});
-	bangsList.appendChild(fragment);
-}
-
 function getUrlParameter(name) {
 	const regex = new RegExp(`[?&]${name}=([^&#]*)`),
 		results = regex.exec(location.search);
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-function saveSelectedEngine() {
-	localStorage.setItem("selectedEngine", engineSelect.value);
-}
-
-function loadSelectedEngine() {
-	const savedEngine = localStorage.getItem("selectedEngine");
-	if (savedEngine) {
-		engineSelect.value = savedEngine;
-	}
 }
 
 function getBaseUrl(url) {
@@ -106,35 +76,35 @@ function getBaseUrl(url) {
 	}
 }
 
-function performSearch(query) {
-	let searchUrl = engineSelect.value;
-	let isSnap = false;
-
-	function processBangOrSnap(code, isSnap) {
-		if (isSnap) {
-			const bangKey = `!${code}`;
-			if (bangPatterns.hasOwnProperty(bangKey)) {
-				const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
-				if (baseUrl) {
-					return `${engineSelect.value}site:${baseUrl} `;
-				}
-			}
-		} else {
-			const bangKey = `!${code}`;
-			if (bangPatterns.hasOwnProperty(bangKey)) {
-				return bangPatterns[bangKey].url;
+function processBangOrSnap(code, isSnap, defaultEngine) {
+	if (isSnap) {
+		const bangKey = `!${code}`;
+		if (bangPatterns.hasOwnProperty(bangKey)) {
+			const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
+			if (baseUrl) {
+				return `${defaultEngine}site:${baseUrl} `;
 			}
 		}
-		return null;
+	} else {
+		const bangKey = `!${code}`;
+		if (bangPatterns.hasOwnProperty(bangKey)) {
+			return bangPatterns[bangKey].url;
+		}
 	}
+	return null;
+}
+
+function performSearch(query, defaultEngine) {
+	let searchUrl = defaultEngine;
+	let isSnap = false;
 
 	if (query.startsWith("!") || query.startsWith("@")) {
 		isSnap = query.startsWith("@");
 		const parts = query.slice(1).split(" ");
-		bangOrSnap = parts[0];
-		bangOrSnapQuery = parts.slice(1).join(" ");
+		const bangOrSnap = parts[0];
+		const bangOrSnapQuery = parts.slice(1).join(" ");
 
-		const result = processBangOrSnap(bangOrSnap, isSnap);
+		const result = processBangOrSnap(bangOrSnap, isSnap, defaultEngine);
 		if (result) {
 			searchUrl = result;
 			query = bangOrSnapQuery;
@@ -145,10 +115,10 @@ function performSearch(query) {
 
 		if (lastPart.startsWith("!") || lastPart.startsWith("@")) {
 			isSnap = lastPart.startsWith("@");
-			bangOrSnap = lastPart.slice(1);
-			bangOrSnapQuery = parts.slice(0, -1).join(" ");
+			const bangOrSnap = lastPart.slice(1);
+			const bangOrSnapQuery = parts.slice(0, -1).join(" ");
 
-			const result = processBangOrSnap(bangOrSnap, isSnap);
+			const result = processBangOrSnap(bangOrSnap, isSnap, defaultEngine);
 			if (result) {
 				searchUrl = result;
 				query = bangOrSnapQuery;
@@ -163,35 +133,67 @@ function performSearch(query) {
 	}
 }
 
-function setupEventListeners() {
-	engineSelect.addEventListener("change", saveSelectedEngine);
-
-	searchForm.addEventListener("submit", (e) => {
-		e.preventDefault();
-		const query = searchInput.value.trim();
-		performSearch(query);
-	});
-
-	document.addEventListener("keydown", (e) => {
-		if (e.key === "/" && document.activeElement !== searchInput) {
-			e.preventDefault();
-			searchInput.focus();
-		} else if (e.key === "Escape" && document.activeElement === searchInput) {
-			searchInput.value = "";
-		}
-	});
-}
-
-function init() {
-	createBangList();
-	loadSelectedEngine();
-	setupEventListeners();
-
+(function () {
 	const searchQuery = getUrlParameter("q");
+
 	if (searchQuery) {
-		searchInput.value = searchQuery;
 		performSearch(searchQuery);
 	}
-}
+})();
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", function () {
+	const scriptEnabled = document.getElementById("script-enabled"),
+		searchForm = document.getElementById("search-form"),
+		searchInput = document.getElementById("search-input"),
+		engineSelect = document.getElementById("engine-select"),
+		bangsList = document.getElementById("bangs-list");
+
+	function createBangList() {
+		const fragment = document.createDocumentFragment();
+		Object.entries(bangPatterns).forEach(([bang, { desc }]) => {
+			const li = document.createElement("li");
+			li.textContent = `${bang}: ${desc}`;
+			fragment.appendChild(li);
+		});
+		bangsList.appendChild(fragment);
+	}
+
+	function saveSelectedEngine() {
+		localStorage.setItem("selectedEngine", engineSelect.value);
+	}
+
+	function loadSelectedEngine() {
+		const savedEngine = localStorage.getItem("selectedEngine");
+		if (savedEngine) {
+			engineSelect.value = savedEngine;
+		}
+	}
+
+	function setupEventListeners() {
+		engineSelect.addEventListener("change", saveSelectedEngine);
+
+		searchForm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const query = searchInput.value.trim();
+			performSearch(query, engineSelect.value);
+		});
+
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "/" && document.activeElement !== searchInput) {
+				e.preventDefault();
+				searchInput.focus();
+			} else if (e.key === "Escape" && document.activeElement === searchInput) {
+				searchInput.value = "";
+			}
+		});
+	}
+
+	function init() {
+		scriptEnabled.style.display = "flex";
+		createBangList();
+		loadSelectedEngine();
+		setupEventListeners();
+	}
+
+	init();
+});
