@@ -60,6 +60,7 @@ const bangPatterns = {
 	"!lb": { url: "https://letterboxd.com/search/", desc: "Letterboxd" },
 	"!mar": { url: "https://search.marginalia.nu/search?query=", desc: "Marginalia" },
 };
+
 function getUrlParameter(name) {
 	const regex = new RegExp(`[?&]${name}=([^&#]*)`),
 		results = regex.exec(location.search);
@@ -135,9 +136,10 @@ function performSearch(query, defaultEngine) {
 
 (function () {
 	const searchQuery = getUrlParameter("q");
+	const defaultEngine = localStorage.getItem("selectedEngine");
 
 	if (searchQuery) {
-		performSearch(searchQuery);
+		performSearch(searchQuery, defaultEngine);
 	}
 })();
 
