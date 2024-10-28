@@ -10,6 +10,7 @@ const bangPatterns = {
 	"!ddg": { url: "https://start.duckduckgo.com/?q=", desc: "DuckDuckGo" },
 	"!you": { url: "https://you.com/search?q=", desc: "You" },
 	"!yep": { url: "https://yep.com/web?q=", desc: "Yep" },
+	"!yan": { url: "https://yandex.com/search/?text=", desc: "Yandex" },
 	"!p": { url: "https://www.perplexity.ai/search?q=", desc: "Perplexity" },
 	"!c": { url: "https://consensus.app/results/?q=", desc: "Consensus" },
 	"!m": { url: "https://www.mojeek.com/search?q=", desc: "Mojeek" },
@@ -32,6 +33,7 @@ const bangPatterns = {
 	"!r": { url: "https://www.reddit.com/search/?q=", desc: "Reddit" },
 	"!rs": { url: "https://www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
 	"!ciu": { url: "https://caniuse.com/?search=", desc: "Can I Use" },
+	"!cp": { url: "https://codepen.io/search/pens?q=", desc: "CodePen" },
 	"!mdn": { url: "https://developer.mozilla.org/en-US/search?q=", desc: "MDN Web Docs" },
 	"!html": { url: "https://developer.mozilla.org/en-US/search?topic=html&q=", base: "https://developer.mozilla.org/en-US/docs/Web/HTML", desc: "MDN HTML" },
 	"!css": { url: "https://developer.mozilla.org/en-US/search?topic=css&q=", base: "https://developer.mozilla.org/en-US/docs/Web/CSS", desc: "MDN CSS" },
@@ -59,6 +61,11 @@ const bangPatterns = {
 	"!mm": { url: "https://www.merklemap.com/search?query=", desc: "Merklemap" },
 	"!lb": { url: "https://letterboxd.com/search/", desc: "Letterboxd" },
 	"!mar": { url: "https://search.marginalia.nu/search?query=", desc: "Marginalia" },
+	"!mcw": { url: "https://minecraft.wiki/w/?search=", desc: "Minecraft Wiki" },
+	"!pvzw": { url: "https://plantsvszombies.wiki.gg/index.php?search=", desc: "Plants vs Zombies Wiki" },
+	"!tw": { url: "https://terraria.wiki.gg/index.php?search=", desc: "Terraria Wiki" },
+	"!hp": { url: "https://www.halopedia.org/index.php?search=", desc: "Halopedia" },
+	"!tfw": { url: "https://wiki.teamfortress.com/w/index.php?search=", desc: "Team Fortress Wiki" },
 };
 
 function getUrlParameter(name) {
