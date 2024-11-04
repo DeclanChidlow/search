@@ -2,23 +2,24 @@
 <h1>
   Search
   
-  [![Stars](https://img.shields.io/github/stars/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/TemplateRepo/stargazers)
-  [![Forks](https://img.shields.io/github/forks/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/TemplateRepo/network/members)
-  [![Pull Requests](https://img.shields.io/github/issues-pr/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/TemplateRepo/pulls)
-  [![Issues](https://img.shields.io/github/issues/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/TemplateRepo/issues)
-  [![Contributors](https://img.shields.io/github/contributors/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlowRepo/Template/graphs/contributors)
-  [![Licence](https://img.shields.io/github/license/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/TemplateRepo/blob/main/LICENCE)
+  [![Stars](https://img.shields.io/github/stars/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/stargazers)
+  [![Forks](https://img.shields.io/github/forks/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/network/members)
+  [![Pull Requests](https://img.shields.io/github/issues-pr/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/pulls)
+  [![Issues](https://img.shields.io/github/issues/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/issues)
+  [![Contributors](https://img.shields.io/github/contributors/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/graphs/contributors)
+  [![Licence](https://img.shields.io/github/license/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/blob/main/LICENCE)
 </h1>
-Perform searches across search engines.
+Search engine wrapper.
 </div>
 <br/>
 
-A super lightweight page that allows users to search across websites.
+A super lightweight search engine wrapper that allows users to search across websites from a single interface with quality of life additions.
 
-### Multi-Engine Search:
+## Features:
 
-Users can select from various search engines via a dropdown menu.
+1. **Lightweight** - The project is extremely quick to load and run. It uses only HTML, CSS, and JavaScript.
+2. **Custom Defaults** - Users can select the search engine they'd like to use by default via a convenient dropdown menu.
+3. **Bang Patterns** - Users can add special commands (eg, "!g" for Google, "!yt" for YouTube) to their query to quickly switch to a specific search engine or website.
+4. **Snap Patterns** - Users can use the same special commands as bangs, substituting '!' for '@', to do a search in their chosen engine that is filtered to a specific site. For example, searching for only GitHub results on DuckDuckGo. 
 
-### Bang Patterns:
-
-This tool supports "bang patterns" similar to DuckDuckGo's bang feature. You can type special commands (eg "!g" for Google, "!yt" for YouTube) at the beginning of a search query to quickly switch to a specific search engine or website. There's a wide variety of bang patterns available, covering general search engines, specialized searches (like Google Fonts or Google Icons), and various websites (like Reddit, GitHub, or MDN).
+The full list of bang/snap patterns is available on the site.
