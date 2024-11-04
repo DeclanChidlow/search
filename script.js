@@ -86,17 +86,21 @@ function getBaseUrl(url) {
 
 function processBangOrSnap(code, isSnap, defaultEngine) {
 	if (isSnap) {
-		const bangKey = `!${code}`;
-		if (bangPatterns.hasOwnProperty(bangKey)) {
-			const baseUrl = bangPatterns[bangKey].base || getBaseUrl(bangPatterns[bangKey].url);
+		const bangKey = `!${code.toLowerCase()}`;
+		const matchingBang = Object.keys(bangPatterns).find((key) => key.toLowerCase() === bangKey);
+
+		if (matchingBang) {
+			const baseUrl = bangPatterns[matchingBang].base || getBaseUrl(bangPatterns[matchingBang].url);
 			if (baseUrl) {
 				return `${defaultEngine}site:${baseUrl} `;
 			}
 		}
 	} else {
-		const bangKey = `!${code}`;
-		if (bangPatterns.hasOwnProperty(bangKey)) {
-			return bangPatterns[bangKey].url;
+		const bangKey = `!${code.toLowerCase()}`;
+		const matchingBang = Object.keys(bangPatterns).find((key) => key.toLowerCase() === bangKey);
+
+		if (matchingBang) {
+			return bangPatterns[matchingBang].url;
 		}
 	}
 	return null;
