@@ -16,6 +16,7 @@ const bangPatterns = {
 	"!m": { url: "https://www.mojeek.com/search?q=", desc: "Mojeek" },
 	"!sc": { url: "https://swisscows.com/web?query=", desc: "Swisscows" },
 	"!k": { url: "https://kagi.com/search?q=", desc: "Kagi" },
+	"!gpt": { url: "https://chatgpt.com/?hints=search&q=", desc: "ChatGPT Search" },
 	"!ask": { url: "https://www.ask.com/web?q=", desc: "Ask" },
 	"!q": { url: "https://www.qwant.com/?q=", desc: "Qwant" },
 	"!exa": { url: "https://exa.ai/search?q=", desc: "Exa" },
