@@ -1,4 +1,4 @@
-const bangPatterns = {
+const shortcodes = {
 	"!g": { url: "https://www.google.com/search?q=", desc: "Google Search" },
 	"!gf": { url: "https://fonts.google.com/?query=", desc: "Google Fonts" },
 	"!gi": { url: "https://fonts.google.com/icons?icon.query=", base: "https://fonts.google.com/icons", desc: "Google Icons" },
@@ -88,20 +88,20 @@ function getBaseUrl(url) {
 function processBangOrSnap(code, isSnap, defaultEngine) {
 	if (isSnap) {
 		const bangKey = `!${code.toLowerCase()}`;
-		const matchingBang = Object.keys(bangPatterns).find((key) => key.toLowerCase() === bangKey);
+		const matchingBang = Object.keys(shortcodes).find((key) => key.toLowerCase() === bangKey);
 
 		if (matchingBang) {
-			const baseUrl = bangPatterns[matchingBang].base || getBaseUrl(bangPatterns[matchingBang].url);
+			const baseUrl = shortcodes[matchingBang].base || getBaseUrl(shortcodes[matchingBang].url);
 			if (baseUrl) {
 				return `${defaultEngine}site:${baseUrl} `;
 			}
 		}
 	} else {
 		const bangKey = `!${code.toLowerCase()}`;
-		const matchingBang = Object.keys(bangPatterns).find((key) => key.toLowerCase() === bangKey);
+		const matchingBang = Object.keys(shortcodes).find((key) => key.toLowerCase() === bangKey);
 
 		if (matchingBang) {
-			return bangPatterns[matchingBang].url;
+			return shortcodes[matchingBang].url;
 		}
 	}
 	return null;
@@ -140,11 +140,11 @@ function performSearch(query, defaultEngine) {
 	}
 
 	if (!query.trim()) {
-		const bangKey = Object.keys(bangPatterns).find((key) => bangPatterns[key].url === searchUrl);
+		const bangKey = Object.keys(shortcodes).find((key) => shortcodes[key].url === searchUrl);
 
 		if (bangKey) {
-			if (bangPatterns[bangKey].base) {
-				window.location.href = bangPatterns[bangKey].base;
+			if (shortcodes[bangKey].base) {
+				window.location.href = shortcodes[bangKey].base;
 			} else {
 				const urlParts = searchUrl.split("/");
 				window.location.href = urlParts.slice(0, 3).join("/");
@@ -171,16 +171,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		searchForm = document.getElementById("search-form"),
 		searchInput = document.getElementById("search-input"),
 		engineSelect = document.getElementById("engine-select"),
-		bangsList = document.getElementById("bangs-list");
+		shortcodeList = document.getElementById("shortcode-list");
 
-	function createBangList() {
+	function createShortcodeList() {
 		const fragment = document.createDocumentFragment();
-		Object.entries(bangPatterns).forEach(([bang, { desc }]) => {
+		Object.entries(shortcodes).forEach(([bang, { desc }]) => {
 			const li = document.createElement("li");
 			li.textContent = `${bang}: ${desc}`;
 			fragment.appendChild(li);
 		});
-		bangsList.appendChild(fragment);
+		shortcodeList.appendChild(fragment);
 	}
 
 	function saveSelectedEngine() {
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function init() {
 		scriptEnabled.style.display = "flex";
-		createBangList();
+		createShortcodeList();
 		loadSelectedEngine();
 		setupEventListeners();
 	}
