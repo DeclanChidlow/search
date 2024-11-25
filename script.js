@@ -67,6 +67,8 @@ const shortcodes = {
 	tw: { url: "https://terraria.wiki.gg/index.php?search=", desc: "Terraria Wiki" },
 	hp: { url: "https://www.halopedia.org/index.php?search=", desc: "Halopedia" },
 	tfw: { url: "https://wiki.teamfortress.com/w/index.php?search=", desc: "Team Fortress Wiki" },
+	arx: { url: "https://arxiv.org/search/?query=", desc: "Arxiv" },
+	acdb: { url: "https://www.classification.gov.au/search/title?search=", desc: "Australian Classification Database" },
 };
 
 function getUrlParameter(name) {
