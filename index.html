@@ -10,14 +10,10 @@
 		<meta property="og:url" content="https://search.vale.rocks" />
 		<title>Vale's Search Wrapper</title>
 		<link rel="stylesheet" href="/styles.css" />
-		<link rel="stylesheet" href="https://vale.rocks/styles/variables/colours.css" />
-		<link rel="stylesheet" href="https://vale.rocks/styles/base/reset.css" />
-		<link rel="stylesheet" href="https://vale.rocks/styles/type/links.css" />
-		<link rel="stylesheet" href="https://vale.rocks/styles/components/input.css" />
 		<link rel="search" type="application/opensearchdescription+xml" title="Vale's Search Wrapper" href="https://search.vale.rocks/opensearch.xml" />
 	</head>
 	<body>
-		<main class="search-container">
+		<main>
 			<h1>Search</h1>
 			<noscript>
 				<p>This app requires JavaScript to function, but it isn't enabled in your browser.</p>
@@ -25,12 +21,12 @@
 
 			<div id="script-enabled">
 				<form id="search-form">
-					<input type="text" id="search-input" autocomplete="off" placeholder="Search..." />
+					<input type="text" id="search-input" placeholder="Search..." />
 					<button type="submit" id="search-button" class="icons">search</button>
 				</form>
 
 				<div class="default-engine">
-					<label for="engine-select">Search Engine:</label>
+					<label for="engine-select">Default Search Engine:</label>
 					<select id="engine-select">
 						<option value="https://www.google.com/search?q=">Google</option>
 						<option value="https://www.bing.com/search?q=">Bing</option>
@@ -53,17 +49,21 @@
 					</select>
 				</div>
 
-				<details>
-					<summary>Shortcodes</summary>
+				<button class="shortcode-open" popovertarget="shortcode-popover">Shortcodes</button>
+
+				<div id="shortcode-popover" popover>
+					<h2>Shortcodes</h2>
+					<p>Bang Patterns - You can add a shortcode prefixed with '!' to the start or end of your query to quickly switch to a specific search engine or website.</p>
+					<br />
+					<p>Snap Patterns - You can add a shortcode prefixed with '@' to the start or end of your query to do a search in your default engine that is filtered to a specific site.</p>
+					<br />
+					<p>The available shortcodes are:</p>
 					<ul id="shortcode-list"></ul>
-				</details>
+					<button class="shortcode-close" popovertarget="shortcode-popover">Close</button>
+				</div>
 			</div>
 		</main>
 
-		<footer>
-			<a href="https://github.com/DeclanChidlow/search">Source Code</a>
-			<hr />
-			<p>Built by <a href="https://vale.rocks">Vale</a></p>
-		</footer>
+		<footer><a href="https://github.com/DeclanChidlow/search">Source Code</a> | Built by <a href="https://vale.rocks">Vale</a></footer>
 	</body>
 </html>
