@@ -69,6 +69,8 @@ const shortcodes = {
 	tfw: { url: "https://wiki.teamfortress.com/w/index.php?search=", desc: "Team Fortress Wiki" },
 	arx: { url: "https://arxiv.org/search/?searchtype=all&query=", desc: "Arxiv" },
 	acdb: { url: "https://www.classification.gov.au/search/title?search=", desc: "Australian Classification Database" },
+	wiby: { url: "https://wiby.me/?q=", desc: "Wiby" },
+	sms: { url: "https://searchmysite.net/search/?q=", desc: "Search My Site" },
 };
 
 function getUrlParameter(name) {
