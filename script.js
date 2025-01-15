@@ -23,6 +23,7 @@ const shortcodes = {
 	sp: { url: "https://www.startpage.com/do/search?query=", desc: "StartPage" },
 	b: { url: "https://search.brave.com/search?q=", desc: "Brave Search" },
 	eco: { url: "https://www.ecosia.org/search?q=", desc: "Ecosia" },
+	vr: { url: "https://vale.rocks/search?q=", desc: "Vale.Rocks" },
 	amz: { url: "https://www.amazon.com/s?k=", desc: "Amazon" },
 	ebay: { url: "https://www.ebay.com/sch/?_nkw=", desc: "eBay" },
 	bc: { url: "https://bandcamp.com/search?q=", desc: "Bandcamp" },
