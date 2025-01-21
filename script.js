@@ -1,77 +1,78 @@
 const shortcodes = {
-	g: { url: "https://www.google.com/search?q=", desc: "Google Search" },
-	gf: { url: "https://fonts.google.com/?query=", desc: "Google Fonts" },
-	gi: { url: "https://fonts.google.com/icons?icon.query=", base: "https://fonts.google.com/icons", desc: "Google Icons" },
-	gm: { url: "https://www.google.com/maps/search/", base: "https://google.com/maps", desc: "Google Maps" },
-	gs: { url: "https://scholar.google.com/scholar?q=", desc: "Google Scholar" },
-	yt: { url: "https://www.youtube.com/search?q=", desc: "YouTube" },
-	ytm: { url: "https://music.youtube.com/search?q=", desc: "YouTube Music" },
-	b: { url: "https://www.bing.com/search?q=", desc: "Bing Search" },
-	ddg: { url: "https://start.duckduckgo.com/?q=", desc: "DuckDuckGo" },
-	you: { url: "https://you.com/search?q=", desc: "You" },
-	yep: { url: "https://yep.com/web?q=", desc: "Yep" },
-	yan: { url: "https://yandex.com/search/?text=", desc: "Yandex" },
-	p: { url: "https://www.perplexity.ai/search?q=", desc: "Perplexity" },
-	c: { url: "https://consensus.app/results/?q=", desc: "Consensus" },
-	m: { url: "https://www.mojeek.com/search?q=", desc: "Mojeek" },
-	sc: { url: "https://swisscows.com/web?query=", desc: "Swisscows" },
-	k: { url: "https://kagi.com/search?q=", desc: "Kagi" },
-	gpt: { url: "https://chatgpt.com/?hints=search&q=", desc: "ChatGPT Search" },
-	ask: { url: "https://www.ask.com/web?q=", desc: "Ask" },
-	q: { url: "https://www.qwant.com/?q=", desc: "Qwant" },
-	exa: { url: "https://exa.ai/search?q=", desc: "Exa" },
-	sp: { url: "https://www.startpage.com/do/search?query=", desc: "StartPage" },
-	b: { url: "https://search.brave.com/search?q=", desc: "Brave Search" },
-	eco: { url: "https://www.ecosia.org/search?q=", desc: "Ecosia" },
-	vr: { url: "https://vale.rocks/search?q=", desc: "Vale.Rocks" },
-	amz: { url: "https://www.amazon.com/s?k=", desc: "Amazon" },
-	ebay: { url: "https://www.ebay.com/sch/?_nkw=", desc: "eBay" },
-	bc: { url: "https://bandcamp.com/search?q=", desc: "Bandcamp" },
-	hn: { url: "https://hn.trieve.ai/?q=", base: "https://news.ycombinator.com", desc: "Hacker News" },
-	w: { url: "https://wikipedia.org/w/index.php?search=", desc: "Wikipedia" },
-	ud: { url: "https://www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
-	ia: { url: "https://archive.org/search?query=", desc: "Internet Archive" },
-	wm: { url: "https://web.archive.org/web/*/", desc: "Wayback Machine" },
-	r: { url: "https://www.reddit.com/search/?q=", desc: "Reddit" },
-	rs: { url: "https://www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
-	ciu: { url: "https://caniuse.com/?search=", desc: "Can I Use" },
-	cp: { url: "https://codepen.io/search/pens?q=", desc: "CodePen" },
-	mdn: { url: "https://developer.mozilla.org/en-US/search?q=", desc: "MDN Web Docs" },
-	html: { url: "https://developer.mozilla.org/en-US/search?topic=html&q=", base: "https://developer.mozilla.org/en-US/docs/Web/HTML", desc: "MDN HTML" },
-	css: { url: "https://developer.mozilla.org/en-US/search?topic=css&q=", base: "https://developer.mozilla.org/en-US/docs/Web/CSS", desc: "MDN CSS" },
-	js: { url: "https://developer.mozilla.org/en-US/search?topic=js&q=", base: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", desc: "MDN JavaScript" },
-	npm: { url: "https://www.npmjs.com/search?q=", desc: "Node Package Manager" },
-	reactn: { url: "https://reactnative.dev/search?q=", desc: "React Native documentation" },
-	wp: { url: "https://wordpress.org/search/", desc: "WordPress documentation" },
-	pypi: { url: "https://pypi.org/search/?q=", desc: "Python Package Index" },
-	bs: { url: "https://bsky.app/search?q=", desc: "Bluesky" },
-	gh: { url: "https://github.com/search?q=", desc: "GitHub" },
-	gl: { url: "https://gitlab.com/search?search=", desc: "GitLab" },
-	lw: { url: "https://www.lesswrong.com/search?query=", desc: "LessWrong" },
-	un: { url: "https://unsplash.com/s/photos/", desc: "Unsplash" },
-	ov: { url: "https://openverse.org/search/?q=", desc: "Openverse" },
-	aur: { url: "https://aur.archlinux.org/packages?K=", desc: "Arch User Repository" },
-	aw: { url: "https://wiki.archlinux.org/index.php?search=", desc: "Arch Wiki" },
-	nixpkg: { url: "https://search.nixos.org/packages?query=", desc: "Nix Packages" },
-	nixopt: { url: "https://search.nixos.org/options?query=", base: "https://search.nixos.org/options", desc: "Nix Options" },
-	pr: { url: "https://www.printables.com/search/models?q=", desc: "Printables" },
-	t: { url: "https://thangs.com/search/", desc: "Thangs" },
-	pm: { url: "https://mail.proton.me/u/0/almost-all-mail#keyword=", desc: "Proton Mail" },
-	pd: { url: "https://drive.proton.me/u/0/search#q=", desc: "Proton Drive" },
-	pc: { url: "https://calendar.proton.me/u/0/search#keyword=", desc: "Proton Calendar" },
-	sym: { url: "https://symbl.cc/en/search/?q=", desc: "SYMBL" },
-	mm: { url: "https://www.merklemap.com/search?query=", desc: "Merklemap" },
-	lb: { url: "https://letterboxd.com/search/", desc: "Letterboxd" },
-	mar: { url: "https://search.marginalia.nu/search?query=", desc: "Marginalia" },
-	mcw: { url: "https://minecraft.wiki/w/?search=", desc: "Minecraft Wiki" },
-	pvzw: { url: "https://plantsvszombies.wiki.gg/index.php?search=", desc: "Plants vs Zombies Wiki" },
-	tw: { url: "https://terraria.wiki.gg/index.php?search=", desc: "Terraria Wiki" },
-	hp: { url: "https://www.halopedia.org/index.php?search=", desc: "Halopedia" },
-	tfw: { url: "https://wiki.teamfortress.com/w/index.php?search=", desc: "Team Fortress Wiki" },
-	arx: { url: "https://arxiv.org/search/?searchtype=all&query=", desc: "Arxiv" },
-	acdb: { url: "https://www.classification.gov.au/search/title?search=", desc: "Australian Classification Database" },
-	wiby: { url: "https://wiby.me/?q=", desc: "Wiby" },
-	sms: { url: "https://searchmysite.net/search/?q=", desc: "Search My Site" },
+	g: { url: "www.google.com/search?q=", desc: "Google Search" },
+	gf: { url: "fonts.google.com/?query=", desc: "Google Fonts" },
+	gi: { url: "fonts.google.com/icons?icon.query=", base: "fonts.google.com/icons", desc: "Google Icons" },
+	gm: { url: "www.google.com/maps/search/", base: "google.com/maps", desc: "Google Maps" },
+	gs: { url: "scholar.google.com/scholar?q=", desc: "Google Scholar" },
+	yt: { url: "www.youtube.com/search?q=", desc: "YouTube" },
+	ytm: { url: "music.youtube.com/search?q=", desc: "YouTube Music" },
+	b: { url: "www.bing.com/search?q=", desc: "Bing Search" },
+	ddg: { url: "start.duckduckgo.com/?q=", desc: "DuckDuckGo" },
+	you: { url: "you.com/search?q=", desc: "You" },
+	yep: { url: "yep.com/web?q=", desc: "Yep" },
+	yan: { url: "yandex.com/search/?text=", desc: "Yandex" },
+	y: { url: "search.yahoo.com/search?p=", desc: "Yahoo!" },
+	p: { url: "www.perplexity.ai/search?q=", desc: "Perplexity" },
+	c: { url: "consensus.app/results/?q=", desc: "Consensus" },
+	m: { url: "www.mojeek.com/search?q=", desc: "Mojeek" },
+	sc: { url: "swisscows.com/web?query=", desc: "Swisscows" },
+	k: { url: "kagi.com/search?q=", desc: "Kagi" },
+	gpt: { url: "chatgpt.com/?hints=search&q=", desc: "ChatGPT Search" },
+	ask: { url: "www.ask.com/web?q=", desc: "Ask" },
+	q: { url: "www.qwant.com/?q=", desc: "Qwant" },
+	exa: { url: "exa.ai/search?q=", desc: "Exa" },
+	sp: { url: "www.startpage.com/do/search?query=", desc: "StartPage" },
+	b: { url: "search.brave.com/search?q=", desc: "Brave Search" },
+	eco: { url: "www.ecosia.org/search?q=", desc: "Ecosia" },
+	vr: { url: "vale.rocks/search?q=", desc: "Vale.Rocks" },
+	amz: { url: "www.amazon.com/s?k=", desc: "Amazon" },
+	ebay: { url: "www.ebay.com/sch/?_nkw=", desc: "eBay" },
+	bc: { url: "bandcamp.com/search?q=", desc: "Bandcamp" },
+	hn: { url: "hn.trieve.ai/?q=", base: "news.ycombinator.com", desc: "Hacker News" },
+	w: { url: "wikipedia.org/w/index.php?search=", desc: "Wikipedia" },
+	ud: { url: "www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
+	ia: { url: "archive.org/search?query=", desc: "Internet Archive" },
+	wm: { url: "web.archive.org/web/*/", desc: "Wayback Machine" },
+	r: { url: "www.reddit.com/search/?q=", desc: "Reddit" },
+	rs: { url: "www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
+	ciu: { url: "caniuse.com/?search=", desc: "Can I Use" },
+	cp: { url: "codepen.io/search/pens?q=", desc: "CodePen" },
+	mdn: { url: "developer.mozilla.org/en-US/search?q=", desc: "MDN Web Docs" },
+	html: { url: "developer.mozilla.org/en-US/search?topic=html&q=", base: "developer.mozilla.org/en-US/docs/Web/HTML", desc: "MDN HTML" },
+	css: { url: "developer.mozilla.org/en-US/search?topic=css&q=", base: "developer.mozilla.org/en-US/docs/Web/CSS", desc: "MDN CSS" },
+	js: { url: "developer.mozilla.org/en-US/search?topic=js&q=", base: "developer.mozilla.org/en-US/docs/Web/JavaScript", desc: "MDN JavaScript" },
+	npm: { url: "www.npmjs.com/search?q=", desc: "Node Package Manager" },
+	reactn: { url: "reactnative.dev/search?q=", desc: "React Native documentation" },
+	wp: { url: "wordpress.org/search/", desc: "WordPress documentation" },
+	pypi: { url: "pypi.org/search/?q=", desc: "Python Package Index" },
+	bs: { url: "bsky.app/search?q=", desc: "Bluesky" },
+	gh: { url: "github.com/search?q=", desc: "GitHub" },
+	gl: { url: "gitlab.com/search?search=", desc: "GitLab" },
+	lw: { url: "www.lesswrong.com/search?query=", desc: "LessWrong" },
+	un: { url: "unsplash.com/s/photos/", desc: "Unsplash" },
+	ov: { url: "openverse.org/search/?q=", desc: "Openverse" },
+	aur: { url: "aur.archlinux.org/packages?K=", desc: "Arch User Repository" },
+	aw: { url: "wiki.archlinux.org/index.php?search=", desc: "Arch Wiki" },
+	nixpkg: { url: "search.nixos.org/packages?query=", desc: "Nix Packages" },
+	nixopt: { url: "search.nixos.org/options?query=", base: "search.nixos.org/options", desc: "Nix Options" },
+	pr: { url: "www.printables.com/search/models?q=", desc: "Printables" },
+	t: { url: "thangs.com/search/", desc: "Thangs" },
+	pm: { url: "mail.proton.me/u/0/almost-all-mail#keyword=", desc: "Proton Mail" },
+	pd: { url: "drive.proton.me/u/0/search#q=", desc: "Proton Drive" },
+	pc: { url: "calendar.proton.me/u/0/search#keyword=", desc: "Proton Calendar" },
+	sym: { url: "symbl.cc/en/search/?q=", desc: "SYMBL" },
+	mm: { url: "www.merklemap.com/search?query=", desc: "Merklemap" },
+	lb: { url: "letterboxd.com/search/", desc: "Letterboxd" },
+	mar: { url: "search.marginalia.nu/search?query=", desc: "Marginalia" },
+	mcw: { url: "minecraft.wiki/w/?search=", desc: "Minecraft Wiki" },
+	pvzw: { url: "plantsvszombies.wiki.gg/index.php?search=", desc: "Plants vs Zombies Wiki" },
+	tw: { url: "terraria.wiki.gg/index.php?search=", desc: "Terraria Wiki" },
+	hp: { url: "www.halopedia.org/index.php?search=", desc: "Halopedia" },
+	tfw: { url: "wiki.teamfortress.com/w/index.php?search=", desc: "Team Fortress Wiki" },
+	arx: { url: "arxiv.org/search/?searchtype=all&query=", desc: "Arxiv" },
+	acdb: { url: "www.classification.gov.au/search/title?search=", desc: "Australian Classification Database" },
+	wiby: { url: "wiby.me/?q=", desc: "Wiby" },
+	sms: { url: "searchmysite.net/search/?q=", desc: "Search My Site" },
 };
 
 function getUrlParameter(name) {
@@ -81,13 +82,8 @@ function getUrlParameter(name) {
 }
 
 function getBaseUrl(url) {
-	try {
-		const urlObj = new URL(url);
-		return urlObj.origin;
-	} catch (e) {
-		console.error("Invalid URL:", url);
-		return null;
-	}
+	const urlObj = new URL("https://" + url);
+	return urlObj.origin;
 }
 
 function processBangOrSnap(code, isSnap, defaultEngine) {
@@ -98,10 +94,10 @@ function processBangOrSnap(code, isSnap, defaultEngine) {
 		if (isSnap) {
 			const baseUrl = shortcodes[matchingShortcode].base || getBaseUrl(shortcodes[matchingShortcode].url);
 			if (baseUrl) {
-				return `${defaultEngine}site:${baseUrl} `;
+				return `${defaultEngine}site:${baseUrl.replace("https://", "")} `;
 			}
 		} else {
-			return shortcodes[matchingShortcode].url;
+			return "https://" + shortcodes[matchingShortcode].url;
 		}
 	}
 	return null;
@@ -117,7 +113,7 @@ function performSearch(query, defaultEngine) {
 		const bangOrSnap = parts[0];
 		const bangOrSnapQuery = parts.slice(1).join(" ");
 
-		const result = processBangOrSnap(bangOrSnap, isSnap, defaultEngine);
+		const result = processBangOrSnap(bangOrSnap, isSnap, searchUrl);
 		if (result) {
 			searchUrl = result;
 			query = bangOrSnapQuery;
@@ -131,7 +127,7 @@ function performSearch(query, defaultEngine) {
 			const bangOrSnap = lastPart.slice(1);
 			const bangOrSnapQuery = parts.slice(0, -1).join(" ");
 
-			const result = processBangOrSnap(bangOrSnap, isSnap, defaultEngine);
+			const result = processBangOrSnap(bangOrSnap, isSnap, searchUrl);
 			if (result) {
 				searchUrl = result;
 				query = bangOrSnapQuery;
@@ -140,17 +136,16 @@ function performSearch(query, defaultEngine) {
 	}
 
 	if (!query.trim()) {
-		const shortcodeKey = Object.keys(shortcodes).find((key) => shortcodes[key].url === searchUrl);
+		const shortcodeKey = Object.keys(shortcodes).find((key) => "https://" + shortcodes[key].url === searchUrl);
 
 		if (shortcodeKey) {
 			if (shortcodes[shortcodeKey].base) {
-				window.location.href = shortcodes[shortcodeKey].base;
+				window.location.href = "https://" + shortcodes[shortcodeKey].base;
 			} else {
-				const urlParts = searchUrl.split("/");
-				window.location.href = urlParts.slice(0, 3).join("/");
+				window.location.href = searchUrl.split("/").slice(0, 3).join("/");
 			}
 		} else {
-			window.location.href = new URL(searchUrl).origin;
+			window.location.href = searchUrl;
 		}
 	} else {
 		window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
