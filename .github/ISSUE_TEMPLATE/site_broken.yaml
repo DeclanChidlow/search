@@ -1,0 +1,19 @@
+name: Report broken site
+description: Report an instance where a specific site can no longer be searched
+title: "broken: <engine name>"
+labels: [bug]
+body:
+  - type: input
+    id: search
+    attributes:
+      label: What search is broken?
+      description: The name of the search broken (e.g Google)
+    validations:
+      required: true
+  - type: input
+    id: new-url
+    attributes:
+      label: What is the new URL?
+      description: The URL where the search can now be conducted, if available
+    validations:
+      required: false
