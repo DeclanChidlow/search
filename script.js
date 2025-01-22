@@ -1,5 +1,5 @@
 const shortcodes = {
-	g: { url: "www.google.com/search?q=", desc: "Google Search" },
+	g: { url: "www.google.com/search?q=", desc: "Google" },
 	gf: { url: "fonts.google.com/?query=", desc: "Google Fonts" },
 	gi: { url: "fonts.google.com/icons?icon.query=", base: "fonts.google.com/icons", desc: "Google Icons" },
 	gm: { url: "www.google.com/maps/search/", base: "google.com/maps", desc: "Google Maps" },
@@ -13,6 +13,7 @@ const shortcodes = {
 	you: { url: "you.com/search?q=", desc: "You" },
 	yep: { url: "yep.com/web?q=", desc: "Yep" },
 	yan: { url: "yandex.com/search/?text=", desc: "Yandex" },
+	good: { url: "good-search.org/en/search/?q=", desc: "Good" },
 	y: { url: "search.yahoo.com/search?p=", desc: "Yahoo!" },
 	p: { url: "www.perplexity.ai/search?q=", desc: "Perplexity" },
 	c: { url: "consensus.app/results/?q=", desc: "Consensus" },
@@ -32,8 +33,10 @@ const shortcodes = {
 	ebay: { url: "www.ebay.com/sch/?_nkw=", desc: "eBay" },
 	bc: { url: "bandcamp.com/search?q=", desc: "Bandcamp" },
 	hn: { url: "hn.trieve.ai/?q=", base: "news.ycombinator.com", desc: "Hacker News" },
+	sw: { url: "simple.wikipedia.org/w/index.php?search=", desc: "Simple Wikipedia" },
 	w: { url: "wikipedia.org/w/index.php?search=", desc: "Wikipedia" },
 	wd: { url: "www.wikidata.org/w/index.php?search=", desc: "Wikidata" },
+	wv: { url: "wikivoyage.org/w/index.php?search=", desc: "Wikivoyage" },
 	ud: { url: "www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
 	ia: { url: "archive.org/search?query=", desc: "Internet Archive" },
 	wm: { url: "web.archive.org/web/*/", desc: "Wayback Machine" },
@@ -83,6 +86,8 @@ const shortcodes = {
 	dblp: { url: "dblp.org/search?q=", desc: "dblp Computer Science Bibliography" },
 	snopes: { url: "www.snopes.com/search/?q=", desc: "Snopes" },
 	nature: { url: "www.nature.com/search?q=", desc: "Nature" },
+	ffn: { url: "www.fanfiction.net/search/?type=story&keywords=cheese", desc: "FanFiction.Net" },
+	ao3: { url: "archiveofourown.org/works/search?work_search[query]=", desc: "Archive of Our Own" },
 };
 
 function getUrlParameter(name) {
