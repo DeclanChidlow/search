@@ -5,6 +5,9 @@ const shortcodes = {
 	gm: { url: "www.google.com/maps/search/", base: "google.com/maps", desc: "Google Maps" },
 	gs: { url: "scholar.google.com/scholar?q=", desc: "Google Scholar" },
 	gp: { url: "patents.google.com/?q=", desc: "Google Patents" },
+	gb: { url: "books.google.com/?q=", desc: "Google Books" },
+	gt: { url: "trends.google.com/explore?q=", desc: "Google Trends" },
+	gff: { url: "www.google.com/search?udm=18&q=", desc: "Google (Filter Forums)" },
 	gdm: { url: "deepmind.google/search/?query=", desc: "Google DeepMind" },
 	yt: { url: "www.youtube.com/search?q=", desc: "YouTube" },
 	ytm: { url: "music.youtube.com/search?q=", desc: "YouTube Music" },
@@ -40,6 +43,7 @@ const shortcodes = {
 	ud: { url: "www.urbandictionary.com/define.php?term=", desc: "Urban Dictionary" },
 	ia: { url: "archive.org/search?query=", desc: "Internet Archive" },
 	wm: { url: "web.archive.org/web/*/", desc: "Wayback Machine" },
+	m: { url: "medium.com/search?q=", desc: "Medium" },
 	r: { url: "www.reddit.com/search/?q=", desc: "Reddit" },
 	rs: { url: "www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
 	ciu: { url: "caniuse.com/?search=", desc: "Can I Use" },
@@ -88,6 +92,8 @@ const shortcodes = {
 	nature: { url: "www.nature.com/search?q=", desc: "Nature" },
 	ffn: { url: "www.fanfiction.net/search/?type=story&keywords=cheese", desc: "FanFiction.Net" },
 	ao3: { url: "archiveofourown.org/works/search?work_search[query]=", desc: "Archive of Our Own" },
+	s: { url: "www.shodan.io/search?query=", desc: "Shodan" },
+	dp: { url: "www.dogpile.com/serp?q=", desc: "Dogpile" },
 };
 
 function getUrlParameter(name) {
