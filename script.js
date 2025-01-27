@@ -75,7 +75,7 @@ const shortcodes = {
 	sym: { url: "symbl.cc/en/search/?q=", desc: "SYMBL" },
 	mm: { url: "www.merklemap.com/search?query=", desc: "Merklemap" },
 	lb: { url: "letterboxd.com/search/", desc: "Letterboxd" },
-	mar: { url: "search.marginalia.nu/search?query=", desc: "Marginalia" },
+	mar: { url: "marginalia-search.com/search?query=", desc: "Marginalia Search" },
 	mcw: { url: "minecraft.wiki/w/?search=", desc: "Minecraft Wiki" },
 	pvzw: { url: "plantsvszombies.wiki.gg/index.php?search=", desc: "Plants vs Zombies Wiki" },
 	tw: { url: "terraria.wiki.gg/index.php?search=", desc: "Terraria Wiki" },
@@ -94,6 +94,7 @@ const shortcodes = {
 	ao3: { url: "archiveofourown.org/works/search?work_search[query]=", desc: "Archive of Our Own" },
 	s: { url: "www.shodan.io/search?query=", desc: "Shodan" },
 	dp: { url: "www.dogpile.com/serp?q=", desc: "Dogpile" },
+	pubmed: { url: "pubmed.ncbi.nlm.nih.gov/?term=", desc: "PubMed" },
 };
 
 function getUrlParameter(name) {
