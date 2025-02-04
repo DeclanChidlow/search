@@ -128,6 +128,7 @@ const shortcodes = {
 	ku: { url: "kukei.eu/?q=", desc: "Kukei.eu" },
 	ew: { url: "wiki.evageeks.org/index.php?search=", desc: "EvaWiki" },
 	leta: { url: "leta.mullvad.net/?q=", desc: "Mullvad Leta" },
+	scratch: { url: "scratch.mit.edu/search/projects?q=", desc: "Scratch" },
 };
 
 function getUrlParameter(name) {
