@@ -127,6 +127,7 @@ const shortcodes = {
 	us: { url: "unobtanium.rocks/search?search=", desc: "Unobtanium Search" },
 	ku: { url: "kukei.eu/?q=", desc: "Kukei.eu" },
 	ew: { url: "wiki.evageeks.org/index.php?search=", desc: "EvaWiki" },
+	leta: { url: "leta.mullvad.net/?q=", desc: "Mullvad Leta" },
 };
 
 function getUrlParameter(name) {
