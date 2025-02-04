@@ -126,6 +126,7 @@ const shortcodes = {
 	mwm: { url: "mwmbl.org/?q=", desc: "Mwmbl" },
 	us: { url: "unobtanium.rocks/search?search=", desc: "Unobtanium Search" },
 	ku: { url: "kukei.eu/?q=", desc: "Kukei.eu" },
+	ew: { url: "wiki.evageeks.org/index.php?search=", desc: "EvaWiki" },
 };
 
 function getUrlParameter(name) {
