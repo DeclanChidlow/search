@@ -129,6 +129,8 @@ const shortcodes = {
 	ew: { url: "wiki.evageeks.org/index.php?search=", desc: "EvaWiki" },
 	leta: { url: "leta.mullvad.net/?q=", desc: "Mullvad Leta" },
 	scratch: { url: "scratch.mit.edu/search/projects?q=", desc: "Scratch" },
+	ssb: { url: "www.ssbwiki.com/index.php?search=", desc: "SmashWiki" },
+	am: { url: "automod.vale.rocks/search?q=", desc: "AutoMod" },
 };
 
 function getUrlParameter(name) {
