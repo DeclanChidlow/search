@@ -131,6 +131,7 @@ const shortcodes = {
 	scratch: { url: "scratch.mit.edu/search/projects?q=", desc: "Scratch" },
 	ssb: { url: "www.ssbwiki.com/index.php?search=", desc: "SmashWiki" },
 	am: { url: "automod.vale.rocks/search?q=", desc: "AutoMod" },
+	ph: { url: "www.phind.com/search/?q=", desc: "Phind" },
 };
 
 function getUrlParameter(name) {
