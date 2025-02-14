@@ -134,7 +134,6 @@ a {
 	height: auto;
 	border: none;
 	color: inherit;
-	position: relative;
 
 	.shortcode-close {
 		position: fixed;
