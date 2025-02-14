@@ -26,6 +26,8 @@
 	--grey: oklch(36% 0.003 17.3);
 	--bright_white: oklch(94.75% 0.04 73);
 	--blue: oklch(56.5% 0.13 253);
+	--yellow: oklch(80.8% 0.165 73.5);
+	--orange: oklch(69.2% 0.189 47.8);
 }
 
 *,
@@ -74,13 +76,12 @@ h2 {
 
 h1 {
 	font-size: 3rem;
-	line-height: 3.2rem;
 	margin-bottom: 1rem;
 }
 
 h2 {
 	font-size: 2rem;
-	line-height: 2.2rem;
+	margin-bottom: 1rem;
 }
 
 a {
@@ -101,7 +102,7 @@ a {
 #script-enabled {
 	display: none; /*Set to flex in JS*/
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 1rem;
 	max-width: 30rem;
 	margin: 0 auto;
 }
@@ -112,6 +113,10 @@ a {
 	input {
 		width: 100%;
 	}
+
+	&:focus-within {
+		outline: var(--blue) solid 2px;
+	}
 }
 
 .shortcode-open {
@@ -119,22 +124,34 @@ a {
 	margin: 0 auto;
 }
 
-.shortcode-close {
-	width: 100%;
-	margin-top: 1rem;
-	background: light-dark(var(--bright_white), var(--black));
-}
-
 #shortcode-popover {
 	background: light-dark(var(--white), var(--grey));
 	text-align: left;
-	padding: 1rem;
+	padding: 3rem 1rem;
 	width: auto;
 	max-width: 40rem;
-	margin: 1rem auto;
+	margin: 0 auto;
 	height: auto;
 	border: none;
 	color: inherit;
+	position: relative;
+
+	.shortcode-close {
+		position: fixed;
+		top: 2.6rem;
+		right: 0.5rem;
+		padding: 0.5rem;
+		font-size: 1.5rem;
+	}
+
+	@media (min-width: 45rem) {
+		margin: 3rem auto;
+
+		.shortcode-close {
+			top: 3rem;
+			right: 3rem;
+		}
+	}
 }
 
 ul {
@@ -156,6 +173,11 @@ input {
 footer {
 	font-family: "Fira Code";
 	font-size: 0.75rem;
+}
+
+.donate {
+	color: light-dark(var(--orange), var(--yellow));
+	text-decoration-color: light-dark(var(--orange), var(--yellow));
 }
 
 ::placeholder {
