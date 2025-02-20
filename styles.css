@@ -27,7 +27,7 @@
 	--bright_white: oklch(94.75% 0.04 73);
 	--blue: oklch(56.5% 0.13 253);
 	--yellow: oklch(80.8% 0.165 73.5);
-	--orange: oklch(69.2% 0.189 47.8);
+	--green: oklch(65.2% 0.141 142.1);
 }
 
 *,
@@ -175,8 +175,8 @@ footer {
 }
 
 .donate {
-	color: light-dark(var(--orange), var(--yellow));
-	text-decoration-color: light-dark(var(--orange), var(--yellow));
+	color: light-dark(var(--black), var(--yellow));
+	text-decoration-color: light-dark(var(--green), var(--yellow));
 }
 
 ::placeholder {
