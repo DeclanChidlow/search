@@ -146,7 +146,7 @@ function getBaseUrl(url) {
 	return urlObj.origin;
 }
 
-function processBangOrSnap(code, isSnap, defaultEngine) {
+function processCode(code, isSnap) {
 	const shortcodeKey = code.toLowerCase();
 	const matchingShortcode = Object.keys(shortcodes).find((key) => key.toLowerCase() === shortcodeKey);
 
@@ -154,10 +154,16 @@ function processBangOrSnap(code, isSnap, defaultEngine) {
 		if (isSnap) {
 			const baseUrl = shortcodes[matchingShortcode].base || getBaseUrl(shortcodes[matchingShortcode].url);
 			if (baseUrl) {
-				return `${defaultEngine}site:${baseUrl.replace("https://", "")} `;
+				return {
+					type: 'snap',
+					result: `site:${baseUrl.replace("https://", "")} `
+				};
 			}
 		} else {
-			return "https://" + shortcodes[matchingShortcode].url;
+			return {
+				type: 'bang',
+				result: "https://" + shortcodes[matchingShortcode].url
+			};
 		}
 	}
 	return null;
@@ -165,37 +171,52 @@ function processBangOrSnap(code, isSnap, defaultEngine) {
 
 function performSearch(query, defaultEngine) {
 	let searchUrl = defaultEngine;
-	let isSnap = false;
+	let sitePrefix = '';
+	let processedQuery = query;
 
-	if (query.startsWith("!") || query.startsWith("@")) {
-		isSnap = query.startsWith("@");
-		const parts = query.slice(1).split(" ");
-		const bangOrSnap = parts[0];
-		const bangOrSnapQuery = parts.slice(1).join(" ");
+	const tokens = query.split(' ');
+	const processedTokens = [];
+	let bangFound = false;
+	let snapFound = false;
 
-		const result = processBangOrSnap(bangOrSnap, isSnap, searchUrl);
-		if (result) {
-			searchUrl = result;
-			query = bangOrSnapQuery;
-		}
-	} else {
-		const parts = query.split(" ");
-		const lastPart = parts[parts.length - 1];
-
-		if (lastPart.startsWith("!") || lastPart.startsWith("@")) {
-			isSnap = lastPart.startsWith("@");
-			const bangOrSnap = lastPart.slice(1);
-			const bangOrSnapQuery = parts.slice(0, -1).join(" ");
-
-			const result = processBangOrSnap(bangOrSnap, isSnap, searchUrl);
-			if (result) {
-				searchUrl = result;
-				query = bangOrSnapQuery;
+	for (let i = 0; i < tokens.length; i++) {
+		const token = tokens[i];
+		if (token.startsWith('!')) {
+			const bangCode = token.slice(1);
+			const result = processCode(bangCode, false, defaultEngine);
+			
+			if (result && result.type === 'bang') {
+				searchUrl = result.result;
+				bangFound = true;
+			} else {
+				processedTokens.push(token);
 			}
+		} else {
+			processedTokens.push(token);
 		}
 	}
 
-	if (!query.trim()) {
+	const finalTokens = [];
+	for (let i = 0; i < processedTokens.length; i++) {
+		const token = processedTokens[i];
+		if (token.startsWith('@')) {
+			const snapCode = token.slice(1);
+			const result = processCode(snapCode, true, defaultEngine);
+			
+			if (result && result.type === 'snap') {
+				sitePrefix = result.result;
+				snapFound = true;
+			} else {
+				finalTokens.push(token);
+			}
+		} else {
+			finalTokens.push(token);
+		}
+	}
+
+	processedQuery = finalTokens.join(' ');
+
+	if (!processedQuery.trim()) {
 		const shortcodeKey = Object.keys(shortcodes).find((key) => "https://" + shortcodes[key].url === searchUrl);
 
 		if (shortcodeKey) {
@@ -207,9 +228,14 @@ function performSearch(query, defaultEngine) {
 		} else {
 			window.location.href = searchUrl;
 		}
-	} else {
-		window.location.href = `${searchUrl}${encodeURIComponent(query)}`;
+		return;
 	}
+
+	if (snapFound) {
+		processedQuery = sitePrefix + processedQuery;
+	}
+
+	window.location.href = `${searchUrl}${encodeURIComponent(processedQuery)}`;
 }
 
 (function () {
