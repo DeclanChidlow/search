@@ -60,6 +60,7 @@ const shortcodes = {
 	bs: { url: "bsky.app/search?q=", desc: "Bluesky" },
 	gh: { url: "github.com/search?q=", desc: "GitHub" },
 	gl: { url: "gitlab.com/search?search=", desc: "GitLab" },
+	wc: { url: "www.webcrawler.com/serp?q=", desc: "WebCrawler" },
 	lw: { url: "www.lesswrong.com/search?query=", desc: "LessWrong" },
 	un: { url: "unsplash.com/s/photos/", desc: "Unsplash" },
 	ov: { url: "openverse.org/search/?q=", desc: "Openverse" },
