@@ -7,10 +7,10 @@ const shortcodes = {
 	gp: { url: "patents.google.com/?q=", desc: "Google Patents" },
 	gb: { url: "books.google.com/?q=", desc: "Google Books" },
 	gt: { url: "trends.google.com/explore?q=", desc: "Google Trends" },
-	gff: { url: "www.google.com/search?udm=18&q=", desc: "Google (Filter Forums)" },
 	gdm: { url: "deepmind.google/search/?query=", desc: "Google DeepMind" },
 	yt: { url: "www.youtube.com/search?q=", desc: "YouTube" },
 	ytm: { url: "music.youtube.com/search?q=", desc: "YouTube Music" },
+	applem: { url: "music.apple.com/search?term=", desc: "Apple Music" },
 	b: { url: "www.bing.com/search?q=", desc: "Bing Search" },
 	ddg: { url: "start.duckduckgo.com/?q=", desc: "DuckDuckGo" },
 	you: { url: "you.com/search?q=", desc: "You" },
@@ -133,6 +133,24 @@ const shortcodes = {
 	ssb: { url: "www.ssbwiki.com/index.php?search=", desc: "SmashWiki" },
 	am: { url: "automod.vale.rocks/search?q=", desc: "AutoMod" },
 	ph: { url: "www.phind.com/search/?q=", desc: "Phind" },
+	moz: { url: "mozberg.com/?q=", desc: "Mozberg" },
+	xkcd: { url: "searchxkcd.com/?q=", desc: "XKCD" },
+	lin: { url: "www.linkedin.com/search/results/all/?keywords=", desc: "LinkedIn" },
+	apple: { url: "www.apple.com/search/", desc: "Apple" },
+	crates: { url: "crates.io/search?q=", desc: "crates.io" },
+	docsrs: { url: "docs.rs/releases/search?query=", desc: "Docs.rs" },
+	wdm: { url: "www.webdesignmuseum.org/?s=", desc: "Web Design Museum" },
+	lcdb: { url: "content.luanti.org/packages/?q=", desc: "Luanti Content DB" },
+	mr: { url: "modrinth.com/mods?q=", desc: "Modrinth" },
+	sm: { url: "www.smashingmagazine.com/search/?q=", desc: "Smashing Magazine" },
+	v: { url: "www.theverge.com/search?q=", desc: "The Verge" },
+	wired: { url: "www.wired.com/search/?q=", desc: "WIRED" },
+	steam: { url: "store.steampowered.com/search/?term=", desc: "Steam" },
+	gog: { url: "www.gog.com/games?query=", desc: "GOG" },
+	egs: { url: "store.epicgames.com/browse?q=", desc: "Epic Games Store" },
+	abc: { url: "discover.abc.net.au/index.html#/?query=", desc: "Australian Broadcasting Corporation" },
+	aa: { url: "annas-archive.org/search?q=", desc: "Anna's Archive" },
+	iio: { url: "itch.io/search?q=", desc: "itch.io" },
 };
 
 function getUrlParameter(name) {
@@ -155,14 +173,14 @@ function processCode(code, isSnap) {
 			const baseUrl = shortcodes[matchingShortcode].base || getBaseUrl(shortcodes[matchingShortcode].url);
 			if (baseUrl) {
 				return {
-					type: 'snap',
-					result: `site:${baseUrl.replace("https://", "")} `
+					type: "snap",
+					result: `site:${baseUrl.replace("https://", "")} `,
 				};
 			}
 		} else {
 			return {
-				type: 'bang',
-				result: "https://" + shortcodes[matchingShortcode].url
+				type: "bang",
+				result: "https://" + shortcodes[matchingShortcode].url,
 			};
 		}
 	}
@@ -171,21 +189,21 @@ function processCode(code, isSnap) {
 
 function performSearch(query, defaultEngine) {
 	let searchUrl = defaultEngine;
-	let sitePrefix = '';
+	let sitePrefix = "";
 	let processedQuery = query;
 
-	const tokens = query.split(' ');
+	const tokens = query.split(" ");
 	const processedTokens = [];
 	let bangFound = false;
 	let snapFound = false;
 
 	for (let i = 0; i < tokens.length; i++) {
 		const token = tokens[i];
-		if (token.startsWith('!')) {
+		if (token.startsWith("!")) {
 			const bangCode = token.slice(1);
 			const result = processCode(bangCode, false, defaultEngine);
-			
-			if (result && result.type === 'bang') {
+
+			if (result && result.type === "bang") {
 				searchUrl = result.result;
 				bangFound = true;
 			} else {
@@ -199,11 +217,11 @@ function performSearch(query, defaultEngine) {
 	const finalTokens = [];
 	for (let i = 0; i < processedTokens.length; i++) {
 		const token = processedTokens[i];
-		if (token.startsWith('@')) {
+		if (token.startsWith("@")) {
 			const snapCode = token.slice(1);
 			const result = processCode(snapCode, true, defaultEngine);
-			
-			if (result && result.type === 'snap') {
+
+			if (result && result.type === "snap") {
 				sitePrefix = result.result;
 				snapFound = true;
 			} else {
@@ -214,7 +232,7 @@ function performSearch(query, defaultEngine) {
 		}
 	}
 
-	processedQuery = finalTokens.join(' ');
+	processedQuery = finalTokens.join(" ");
 
 	if (!processedQuery.trim()) {
 		const shortcodeKey = Object.keys(shortcodes).find((key) => "https://" + shortcodes[key].url === searchUrl);
