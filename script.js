@@ -155,6 +155,7 @@ const shortcodes = {
 	abc: { url: "discover.abc.net.au/index.html#/?query=", desc: "Australian Broadcasting Corporation" },
 	aa: { url: "annas-archive.org/search?q=", desc: "Anna's Archive" },
 	iio: { url: "itch.io/search?q=", desc: "itch.io" },
+	iseas: { url: "indieseas.net/search?q=", desc: "IndieSeas" },
 };
 
 function getUrlParameter(name) {

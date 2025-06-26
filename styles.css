@@ -1,21 +1,16 @@
 @font-face {
-	font-family: "Lexend";
-	src: url("https://vale.rocks/assets/typefaces/Lexend/Lexend-VariableFont_wght.woff2");
+	font-family: "Work Sans";
+	src: url("https://vale.rocks/assets/typefaces/WorkSans.woff2");
+	font-weight: 100 900;
+	font-display: fallback;
 }
 
 @font-face {
 	font-family: "Fira Code";
-	src: url("https://vale.rocks/assets/typefaces/Fira_Code/FiraCode-VariableFont_wght.woff2");
-}
-
-@font-face {
-	font-family: "Material Symbols";
-	src: url("https://vale.rocks/assets/typefaces/Material_Symbols_Sharp/MaterialSymbolsSharp-Regular.woff2");
-}
-
-.icons {
-	font-family: "Material Symbols";
-	user-select: none;
+	src: url("https://vale.rocks/assets/typefaces/FiraCode.woff2");
+	font-weight: 300 700;
+	font-display: fallback;
+	size-adjust: 90%;
 }
 
 :root {
@@ -26,6 +21,7 @@
 	--grey: oklch(36% 0.003 17.3);
 	--bright_white: oklch(94.75% 0.04 73);
 	--blue: oklch(56.5% 0.13 253);
+	--cyan: oklch(71.2% 0.112 198.7);
 	--yellow: oklch(80.8% 0.165 73.5);
 	--green: oklch(65.2% 0.141 142.1);
 }
@@ -46,11 +42,9 @@ body {
 	height: 100%;
 }
 
-input,
-button,
-textarea,
-select {
-	font: inherit;
+html {
+	overscroll-behavior-y: none;
+	text-size-adjust: none;
 }
 
 body {
@@ -60,7 +54,8 @@ body {
 	color: light-dark(var(--black), var(--bright_white));
 	background: light-dark(var(--bright_white), var(--black));
 	line-height: calc(1rem + 0.5rem);
-	font-family: "Lexend", sans-serif;
+	font-family: "Work Sans", sans-serif;
+	font-weight: 430;
 	padding: 1rem;
 }
 
@@ -75,27 +70,29 @@ h2 {
 }
 
 h1 {
-	font-size: 3rem;
+	font-size: 2.8rem;
+	line-height: 3rem;
 	margin-bottom: 1rem;
 }
 
 h2 {
-	font-size: 2rem;
+	font-size: 1.8rem;
+	line-height: 2rem;
 	margin-bottom: 1rem;
 }
 
 a {
 	color: inherit;
-	text-decoration: underline 0.1rem var(--blue);
+	text-decoration: underline 0.08rem light-dark(var(--cyan), var(--blue));
 	-webkit-text-decoration-line: underline;
-	-webkit-text-decoration-color: var(--blue);
+	-webkit-text-decoration-color: light-dark(var(--cyan), var(--blue));
 	text-decoration-skip-ink: none;
-	text-underline-offset: 0.2rem;
+	text-underline-offset: 0.25rem;
 
 	&:hover,
 	&:active {
-		text-decoration-thickness: 0.7rem;
-		text-underline-offset: -0.37rem;
+		text-decoration-thickness: 0.6rem;
+		text-underline-offset: -0.29rem;
 	}
 }
 
@@ -112,6 +109,10 @@ a {
 
 	input {
 		width: 100%;
+	}
+
+	svg {
+		height: 1rem;
 	}
 
 	&:focus-within {
@@ -140,7 +141,10 @@ a {
 		top: 2.6rem;
 		right: 0.5rem;
 		padding: 0.5rem;
-		font-size: 1.5rem;
+	}
+
+	svg {
+		height: 1.5rem;
 	}
 
 	@media (min-width: 45rem) {
@@ -162,15 +166,24 @@ button,
 select,
 input {
 	color: light-dark(var(--black), var(--bright_white));
-	padding: 0.2rem 0.5rem;
+	padding: 0.3rem 0.5rem;
 	background: light-dark(var(--white), var(--grey));
-	border: none;
+	border: transparent;
 	border-radius: 0;
-	-webkit-appearance: none;
+	text-overflow: ellipsis;
+	font-family: inherit;
+}
+
+button {
+	display: grid;
+}
+
+svg {
+	fill: light-dark(var(--black), var(--bright_white));
 }
 
 footer {
-	font-family: "Fira Code";
+	font-family: "Fira Code", monospace;
 	font-size: 0.75rem;
 }
 

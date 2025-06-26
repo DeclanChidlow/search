@@ -1,6 +1,6 @@
 <div align="center">
 <h1>
-  Search
+  Search Router
   
   [![Stars](https://img.shields.io/github/stars/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/stargazers)
   [![Forks](https://img.shields.io/github/forks/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/network/members)
@@ -9,11 +9,11 @@
   [![Contributors](https://img.shields.io/github/contributors/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/graphs/contributors)
   [![Licence](https://img.shields.io/github/license/DeclanChidlow/search?style=flat-square&logoColor=white)](https://github.com/DeclanChidlow/search/blob/main/LICENCE)
 </h1>
-Search engine wrapper.
+Search engine router.
 </div>
 <br/>
 
-A super lightweight search engine wrapper that allows users to search across websites from a single interface with quality of life additions.
+A super lightweight search engine router that allows users to search across websites from a single interface with quality of life additions.
 
 ## Features:
 

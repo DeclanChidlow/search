@@ -1,0 +1,16 @@
+{
+	"name": "Vale's Search Router",
+	"short_name": "Search Router",
+	"description": "Lightweight search engine router that enables quickly jumping between search engines and other quality of life features.",
+	"start_url": "/",
+	"display": "standalone",
+	"id": "vales-search-router",
+	"icons": [
+		{
+			"src": "/favicon.svg",
+			"sizes": "any"
+		}
+	],
+	"background_color": "#131111",
+	"categories": ["productivity", "utilities"]
+}

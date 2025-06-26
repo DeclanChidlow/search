@@ -5,29 +5,18 @@
 		<script src="script.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>Vale's Search Wrapper</title>
-		<meta property="og:title" content="Vale's Search Wrapper">
+		<title>Vale's Search Router</title>
+		<meta property="og:title" content="Vale's Search Router">
 
-		<meta name="description" content="Fast, lightweight search engine wrapper with !bang shortcuts and @snap site filters. Switch between search engines instantly and search specific websites with ease.">
-		<meta property="og:description" content="Lightweight search engine wrapper that enables quickly jumping between search engines and other quality of life features.">
+		<meta name="description" content="Fast, lightweight search engine router with !bang shortcuts and @snap site filters. Switch between search engines instantly and search specific websites with ease.">
+		<meta property="og:description" content="Lightweight search engine router that enables quickly jumping between search engines and other quality of life features.">
 
-		<link rel="icon" type="image/svg+xml" href="/assets/search_favicon.svg">
-		<link rel="icon" type="image/png" sizes="16x16" href="/assets/search_favicon_x16.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/assets/search_favicon_x32.png">
-		<link rel="icon" type="image/png" sizes="48x48" href="/assets/search_favicon_x48.png">
-		<link rel="icon" type="image/png" sizes="64x64" href="/assets/search_favicon_x64.png">
-		<link rel="icon" type="image/png" sizes="152x152" href="/assets/search_favicon_x152.png">
-		<link rel="icon" type="image/png" sizes="192x192" href="/assets/search_favicon_x192.png">
-		<link rel="icon" type="image/png" sizes="512x512" href="/assets/search_favicon_x512.png">
+		<link rel="icon" type="image/svg+xml" href="https://search.vale.rocks/favicon.svg">
 
-		<link rel="apple-touch-icon" sizes="152x152" href="/assets/search_favicon_x152.png">
-		<link rel="apple-touch-icon" sizes="192x192" href="/assets/search_favicon_x192.png">
-		<link rel="apple-touch-icon" sizes="512x512" href="/assets/search_favicon_x512.png">
+		<meta property="og:image" content="/og_image.png">
+		<meta property="og:image:alt" content="A magnifying glass next to the text Vale's Search Router.">
 
-		<meta property="og:image" content="/assets/og_image.png">
-		<meta property="og:image:alt" content="A magnifying glass next to the text Vale's Search Wrapper.">
-
-		<meta property="og:site_name" content="Vale's Search Wrapper">
+		<meta property="og:site_name" content="Vale's Search Router">
 		<meta property="og:locale" content="en_AU">
 		<meta property="og:url" content="https://search.vale.rocks">
 		<meta property="og:type" content="website">
@@ -39,18 +28,16 @@
 		<meta name="author" content="Declan Chidlow">
 		<meta name="contact" content="https://vale.rocks/contact">
 
-
-		<link rel="preload" href="https://vale.rocks/assets/typefaces/Lexend/Lexend-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="https://vale.rocks/assets/typefaces/Fira_Code/FiraCode-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="https://vale.rocks/assets/typefaces/Material_Symbols_Sharp/MaterialSymbolsSharp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-
+		<link rel="preload" href="https://vale.rocks/assets/typefaces/WorkSans.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://vale.rocks/assets/typefaces/FiraCode.woff2" as="font" type="font/woff2" crossorigin>
 		<link rel="stylesheet" href="/styles.css">
 
-		<link rel="search" type="application/opensearchdescription+xml" title="Vale's Search Wrapper" href="https://search.vale.rocks/opensearch.xml">
+		<link rel="search" type="application/opensearchdescription+xml" title="Vale's Search Router" href="https://search.vale.rocks/opensearch.xml">
+		<link rel="manifest" href="/app.webmanifest">
 	</head>
 	<body>
 		<main>
-			<h1>Search</h1>
+			<h1>Search Router</h1>
 			<noscript>
 				<p>This app requires JavaScript to function, but it isn't enabled in your browser.</p>
 			</noscript>
@@ -58,7 +45,9 @@
 			<div id="script-enabled">
 				<form id="search-form">
 					<input type="text" id="search-input" placeholder="Search...">
-					<button type="submit" id="search-button" class="icons">search</button>
+					<button type="submit" id="search-button">
+						<svg viewBox="0 -960 960 960"><title>Search</title><path d="M774-118 533-359q-30 21-70.29 33-40.29 12-81.68 12Q271-314 194-391t-77-187q0-110 77-187t187-77q110 0 187 77t77 187.03q0 41.39-11 79.18Q623-461 601-429l242 242-69 69ZM381-412q70 0 118-48t48-118q0-70-48-118t-118-48q-70 0-118 48t-48 118q0 70 48 118t118 48Z"/></svg>
+					</button>
 				</form>
 
 				<div class="default-engine">
@@ -119,7 +108,9 @@
 					<br>
 					<p>The available shortcodes are:</p>
 					<ul id="shortcode-list"></ul>
-					<button class="shortcode-close icons" popovertarget="shortcode-popover">Close</button>
+					<button class="shortcode-close" popovertarget="shortcode-popover">
+						<svg viewBox="0 -960 960 960"><title>Close shortcode panel</title><path d="m287-216-69-71 192-193-192-195 69-71 194 195 192-195 69 71-192 195 192 193-69 71-192-195-194 195Z"/></svg>
+					</button>
 				</div>
 			</div>
 		</main>
