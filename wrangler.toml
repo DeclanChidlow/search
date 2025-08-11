@@ -1,6 +1,7 @@
-name = "search-vale-rocks"
+name = "search"
 compatibility_date = "2025-08-11"
 
 [assets]
+directory = "/"
 not_found_handling = "404-page"
 html_handling = "drop-trailing-slash"
