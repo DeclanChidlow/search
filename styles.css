@@ -97,8 +97,8 @@ a {
 #script-enabled {
 	display: none; /*Set to flex in JS*/
 	flex-direction: column;
-	gap: 1rem;
-	max-inline-size: 30rem;
+	gap: 2rem;
+	max-inline-size: 40rem;
 	margin-inline: auto;
 }
 
@@ -117,6 +117,14 @@ a {
 	&:focus-within {
 		outline: var(--blue) solid 2px;
 	}
+}
+
+.default-engine {
+	margin-inline: auto;
+}
+
+#engine-select {
+	display: block;
 }
 
 .shortcode-open {
