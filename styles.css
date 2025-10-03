@@ -39,12 +39,11 @@
 
 html,
 body {
-	height: 100%;
+	block-size: 100%;
 }
 
 html {
 	overscroll-behavior-y: none;
-	text-size-adjust: none;
 }
 
 body {
@@ -53,32 +52,31 @@ body {
 	flex-direction: column;
 	color: light-dark(var(--black), var(--bright_white));
 	background: light-dark(var(--bright_white), var(--black));
-	line-height: calc(1rem + 0.5rem);
-	font-family: "Work Sans", sans-serif;
-	font-weight: 430;
+	font:
+		430 1rem/1.5 "Work Sans",
+		sans-serif;
 	padding: 1rem;
 }
 
 main {
-	margin: auto 0;
+	margin-block: auto;
 }
 
 h1,
 h2 {
 	text-transform: uppercase;
 	font-weight: 700;
+	margin-block-end: 1rem;
 }
 
 h1 {
 	font-size: 2.8rem;
 	line-height: 3rem;
-	margin-bottom: 1rem;
 }
 
 h2 {
 	font-size: 1.8rem;
 	line-height: 2rem;
-	margin-bottom: 1rem;
 }
 
 a {
@@ -100,19 +98,20 @@ a {
 	display: none; /*Set to flex in JS*/
 	flex-direction: column;
 	gap: 1rem;
-	max-width: 30rem;
-	margin: 0 auto;
+	max-inline-size: 30rem;
+	margin-inline: auto;
 }
 
 #search-form {
 	display: flex;
 
 	input {
-		width: 100%;
+		inline-size: 100%;
 	}
 
 	svg {
-		height: 1rem;
+		block-size: 1.3rem;
+		margin-block: auto;
 	}
 
 	&:focus-within {
@@ -121,57 +120,66 @@ a {
 }
 
 .shortcode-open {
-	width: fit-content;
-	margin: 0 auto;
+	block-size: fit-content;
+	margin-inline: auto;
 }
 
 #shortcode-popover {
 	background: light-dark(var(--white), var(--grey));
 	text-align: left;
-	padding: 3rem 1rem;
-	width: auto;
-	max-width: 40rem;
+	padding-block: 3rem;
+	padding-inline: 1rem;
+	max-inline-size: 40rem;
 	margin: 0 auto;
-	height: auto;
 	border: none;
 	color: inherit;
 
 	.shortcode-close {
 		position: fixed;
-		top: 2.6rem;
-		right: 0.5rem;
+		inset-block-start: 2.6rem;
+		inset-inline-end: 0.5rem;
 		padding: 0.5rem;
 	}
 
 	svg {
-		height: 1.5rem;
+		block-size: 1.5rem;
 	}
 
 	@media (min-width: 45rem) {
-		margin: 3rem auto;
+		margin-block: 3rem;
 
 		.shortcode-close {
-			top: 3rem;
-			right: 3rem;
+			inset-block-start: 3rem;
+			inset-inline-end: 3rem;
 		}
 	}
 }
 
 ul {
 	list-style-type: "✦ ";
-	padding-left: 2rem;
+	padding-inline-start: 2rem;
 }
 
 button,
 select,
 input {
 	color: light-dark(var(--black), var(--bright_white));
-	padding: 0.3rem 0.5rem;
+	padding-block: 0.3rem;
+	padding-inline: 0.5rem;
 	background: light-dark(var(--white), var(--grey));
 	border: transparent;
 	border-radius: 0;
-	text-overflow: ellipsis;
 	font-family: inherit;
+	font-weight: initial;
+	font-size: 1rem;
+}
+
+input {
+	padding-block: 0.5rem;
+}
+
+label {
+	font-size: small;
 }
 
 button {
@@ -183,8 +191,9 @@ svg {
 }
 
 footer {
-	font-family: "Fira Code", monospace;
-	font-size: 0.75rem;
+	font:
+		0.75rem "Fira Code",
+		monospace;
 }
 
 .donate {

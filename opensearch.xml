@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
 	<ShortName>Vale's Search</ShortName>
-	<Description>A search engine wrapper with handy additions.</Description>
-	<Tags>web search wrapper Vale</Tags>
+	<Description>A search engine router with handy additions.</Description>
+	<Tags>web search wrapper router Vale</Tags>
 	<Contact>search@vale.rocks</Contact>
 	<Url type="text/html" template="https://search.vale.rocks/?q={searchTerms}"/>
 	<Url type="application/opensearchdescription+xml" rel="self" template="https://search.vale.rocks/opensearch.xml"/>
-	<LongName>Vale's Search Wrapper</LongName>
+	<LongName>Vale's Search Router</LongName>
 	<Image type="image/svg">https://search.vale.rocks/favicon.svg</Image>
 	<Developer>Declan Chidlow (Vale)</Developer>
-	<AdultContent>true</AdultContent>
 	<Language>*</Language>
 	<InputEncoding>UTF-8</InputEncoding>
 	<OutputEncoding>UTF-8</OutputEncoding>

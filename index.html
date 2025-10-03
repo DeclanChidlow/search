@@ -2,35 +2,37 @@
 <html lang="en">
   <head profile="http://a9.com/-/spec/opensearch/1.1/">
 		<meta charset="UTF-8">
-		<script src="script.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<title>Vale's Search Router</title>
-		<meta property="og:title" content="Vale's Search Router">
 
+		<script src="script.js"></script>
+
+		<link rel="stylesheet" href="/styles.css">
+		<link rel="preload" href="https://vale.rocks/assets/typefaces/WorkSans.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://vale.rocks/assets/typefaces/FiraCode.woff2" as="font" type="font/woff2" crossorigin>
+
+		<meta property="og:title" content="Vale's Search Router">
 		<meta name="description" content="Fast, lightweight search engine router with !bang shortcuts and @snap site filters. Switch between search engines instantly and search specific websites with ease.">
 		<meta property="og:description" content="Lightweight search engine router that enables quickly jumping between search engines and other quality of life features.">
+		<meta property="og:type" content="website">
 
 		<link rel="icon" type="image/svg+xml" href="https://search.vale.rocks/favicon.svg">
 
 		<meta property="og:image" content="/og_image.png">
 		<meta property="og:image:alt" content="A magnifying glass next to the text Vale's Search Router.">
 
+		<link rel="canonical" href="https://search.vale.rocks">
+		<meta property="og:url" content="https://search.vale.rocks">
+
 		<meta property="og:site_name" content="Vale's Search Router">
 		<meta property="og:locale" content="en_AU">
-		<meta property="og:url" content="https://search.vale.rocks">
-		<meta property="og:type" content="website">
-
-		<meta name="color-scheme" content="light dark">
-		<meta name="theme-color" content="oklch(94.75% 0.04 73)" media="(prefers-color-scheme: light)">
-		<meta name="theme-color" content="oklch(18% 0.003 17.5)" media="(prefers-color-scheme: dark)">
 
 		<meta name="author" content="Declan Chidlow">
 		<meta name="contact" content="https://vale.rocks/contact">
 
-		<link rel="preload" href="https://vale.rocks/assets/typefaces/WorkSans.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="https://vale.rocks/assets/typefaces/FiraCode.woff2" as="font" type="font/woff2" crossorigin>
-		<link rel="stylesheet" href="/styles.css">
+		<meta name="color-scheme" content="light dark">
+		<meta name="theme-color" content="oklch(94.75% 0.04 73)" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="oklch(18% 0.003 17.5)" media="(prefers-color-scheme: dark)">
 
 		<link rel="search" type="application/opensearchdescription+xml" title="Vale's Search Router" href="https://search.vale.rocks/opensearch.xml">
 		<link rel="manifest" href="/app.webmanifest">
@@ -115,6 +117,6 @@
 			</div>
 		</main>
 
-		<footer><a href="https://github.com/DeclanChidlow/search">Source Code</a> | Built by <a href="https://vale.rocks">Vale</a> | <a href="https://vale.rocks/support" class="donate">Donate</a></footer>
+		<footer><a href="https://github.com/DeclanChidlow/search">Source Code</a> | Built by <a href="https://vale.rocks">Declan Chidlow</a> | <a href="https://vale.rocks/support" class="donate">Donate</a></footer>
 	</body>
 </html>
