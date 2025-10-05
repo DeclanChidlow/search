@@ -135,6 +135,7 @@ a {
 #shortcode-popover {
 	background: light-dark(var(--white), var(--grey));
 	text-align: left;
+	block-size: 100%;
 	padding-block: 3rem;
 	padding-inline: 1rem;
 	max-inline-size: 40rem;
