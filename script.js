@@ -168,6 +168,7 @@ const shortcodes = {
 	iio: { url: "itch.io/search?q=", desc: "itch.io" },
 	iseas: { url: "indieseas.net/search?q=", desc: "IndieSeas" },
 	sci: { url: "scira.ai/?q=", desc: "Scira" },
+	glg: { url: "gloogle.tiago.zip/?q=", desc: "Gloogle" },
 };
 
 function getUrlParameter(name) {
