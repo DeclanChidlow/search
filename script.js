@@ -28,7 +28,6 @@ const shortcodes = {
 	gpt: { url: "chatgpt.com/?hints=search&q=", desc: "ChatGPT Search" },
 	oai: { url: "openai.com/search/?q=", desc: "OpenAI" },
 	claude: { url: "claude.ai/new?q=", desc: "Claude" },
-	ask: { url: "www.ask.com/web?q=", desc: "Ask" },
 	q: { url: "www.qwant.com/?q=", desc: "Qwant" },
 	exa: { url: "exa.ai/search?q=", desc: "Exa" },
 	sp: { url: "www.startpage.com/do/search?query=", desc: "StartPage" },
