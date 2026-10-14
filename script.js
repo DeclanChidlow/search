@@ -164,16 +164,31 @@ const shortcodes = {
 	gog: { url: "www.gog.com/games?query=", desc: "GOG" },
 	egs: { url: "store.epicgames.com/browse?q=", desc: "Epic Games Store" },
 	abc: { url: "discover.abc.net.au/index.html#/?query=", desc: "Australian Broadcasting Corporation" },
-	aa: { url: "annas-archive.org/search?q=", desc: "Anna's Archive" },
 	iio: { url: "itch.io/search?q=", desc: "itch.io" },
 	iseas: { url: "indieseas.net/search?q=", desc: "IndieSeas" },
 	sci: { url: "scira.ai/?q=", desc: "Scira" },
 	glg: { url: "gloogle.tiago.zip/?q=", desc: "Gloogle" },
 };
 
-const shortcodesByCode = new Map(Object.entries(shortcodes).map(([code, shortcode]) => [code.toLowerCase(), shortcode]));
+let shortcodesByCode = null;
 
-const shortcodesByUrl = new Map(Object.entries(shortcodes).map(([, shortcode]) => [`https://${shortcode.url}`, shortcode]));
+function getShortcode(code) {
+	if (!shortcodesByCode) {
+		shortcodesByCode = new Map(Object.entries(shortcodes).map(([key, shortcode]) => [key.toLowerCase(), shortcode]));
+	}
+
+	return shortcodesByCode.get(code.toLowerCase());
+}
+
+let shortcodesByUrl = null;
+
+function getShortcodeByUrl(url) {
+	if (!shortcodesByUrl) {
+		shortcodesByUrl = new Map(Object.entries(shortcodes).map(([, shortcode]) => [`https://${shortcode.url}`, shortcode]));
+	}
+
+	return shortcodesByUrl.get(url);
+}
 
 function getUrlParameter(name) {
 	return new URLSearchParams(location.search).get(name) || "";
@@ -184,26 +199,27 @@ function getBaseUrl(url) {
 	return urlObj.origin;
 }
 
-function processCode(code, isSnap) {
-	const shortcode = shortcodesByCode.get(code.toLowerCase());
-
-	if (shortcode) {
-		if (isSnap) {
-			const baseUrl = shortcode.base || getBaseUrl(shortcode.url);
-			if (baseUrl) {
-				return {
-					type: "snap",
-					result: `site:${baseUrl.replace("https://", "")} `,
-				};
-			}
-		} else {
-			return {
-				type: "bang",
-				result: "https://" + shortcode.url,
-			};
-		}
+function getSavedEngine() {
+	try {
+		return localStorage.getItem("selectedEngine");
+	} catch {
+		return null;
 	}
-	return null;
+}
+
+function processCode(code, isSnap) {
+	const shortcode = getShortcode(code);
+
+	if (!shortcode) {
+		return null;
+	}
+
+	if (isSnap) {
+		const baseUrl = shortcode.base || getBaseUrl(shortcode.url);
+		return baseUrl ? `site:${baseUrl.replace("https://", "")} ` : null;
+	}
+
+	return "https://" + shortcode.url;
 }
 
 function performSearch(query, defaultEngine) {
@@ -217,14 +233,14 @@ function performSearch(query, defaultEngine) {
 			const result = processCode(token.slice(1), false);
 
 			if (result) {
-				searchUrl = result.result;
+				searchUrl = result;
 				continue;
 			}
 		} else if (token.startsWith("@")) {
 			const result = processCode(token.slice(1), true);
 
 			if (result) {
-				sitePrefix = result.result;
+				sitePrefix = result;
 				continue;
 			}
 		}
@@ -235,7 +251,7 @@ function performSearch(query, defaultEngine) {
 	let processedQuery = processedTokens.join(" ");
 
 	if (!processedQuery.trim()) {
-		const shortcode = shortcodesByUrl.get(searchUrl);
+		const shortcode = getShortcodeByUrl(searchUrl);
 
 		if (shortcode) {
 			const target = shortcode.base ? `https://${shortcode.base}` : searchUrl.split("/").slice(0, 3).join("/");
@@ -272,14 +288,18 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function saveSelectedEngine() {
-		localStorage.setItem("selectedEngine", engineSelect.value);
+		try {
+			localStorage.setItem("selectedEngine", engineSelect.value);
+		} catch {}
 	}
 
 	function loadSelectedEngine() {
-		const savedEngine = localStorage.getItem("selectedEngine");
+		const savedEngine = getSavedEngine();
+
 		if (savedEngine) {
 			engineSelect.value = savedEngine;
 		} else {
+			engineSelect.value = document.documentElement.dataset.defaultEngine || engineSelect.value;
 			// First time visitor
 			saveSelectedEngine();
 		}
@@ -334,3 +354,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	init();
 });
+
+(function () {
+	if (window.__searchRouterRedirected) {
+		return;
+	}
+
+	const searchQuery = getUrlParameter("q");
+
+	if (!searchQuery) {
+		return;
+	}
+
+	const engine = getSavedEngine() || document.documentElement.dataset.defaultEngine;
+
+	if (engine) {
+		window.__searchRouterRedirected = true;
+		performSearch(searchQuery, engine);
+	}
+})();
