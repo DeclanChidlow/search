@@ -276,7 +276,8 @@ function performSearch(query, defaultEngine) {
 
 (function () {
 	const searchQuery = getUrlParameter("q");
-	const defaultEngine = localStorage.getItem("selectedEngine");
+	const engineSelect = document.getElementById("engine-select");
+	const defaultEngine = localStorage.getItem("selectedEngine") || (engineSelect ? engineSelect.value : "");
 
 	if (searchQuery) {
 		performSearch(searchQuery, defaultEngine);
