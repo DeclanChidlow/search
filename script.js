@@ -52,7 +52,6 @@ const shortcodes = {
 	me: { url: "medium.com/search?q=", desc: "Medium" },
 	r: { url: "www.reddit.com/search/?q=", desc: "Reddit" },
 	rs: { url: "www.reddit.com/search/?type=sr&q=", desc: "Reddit Subreddits" },
-	ras: { url: "raccoonshift.org/web?q=", desc: "RacoonShift" },
 	ciu: { url: "caniuse.com/?search=", desc: "Can I Use" },
 	cp: { url: "codepen.io/search/pens?q=", desc: "CodePen" },
 	tvdb: { url: "thetvdb.com/search?query=", desc: "TheTVDB" },
@@ -309,6 +308,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		const savedEngine = localStorage.getItem("selectedEngine");
 		if (savedEngine) {
 			engineSelect.value = savedEngine;
+		} else {
+			saveSelectedEngine();
 		}
 	}
 
