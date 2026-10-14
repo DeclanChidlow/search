@@ -171,10 +171,12 @@ const shortcodes = {
 	glg: { url: "gloogle.tiago.zip/?q=", desc: "Gloogle" },
 };
 
+const shortcodesByCode = new Map(Object.entries(shortcodes).map(([code, shortcode]) => [code.toLowerCase(), shortcode]));
+
+const shortcodesByUrl = new Map(Object.entries(shortcodes).map(([, shortcode]) => [`https://${shortcode.url}`, shortcode]));
+
 function getUrlParameter(name) {
-	const regex = new RegExp(`[?&]${name}=([^&#]*)`),
-		results = regex.exec(location.search);
-	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	return new URLSearchParams(location.search).get(name) || "";
 }
 
 function getBaseUrl(url) {
@@ -183,12 +185,11 @@ function getBaseUrl(url) {
 }
 
 function processCode(code, isSnap) {
-	const shortcodeKey = code.toLowerCase();
-	const matchingShortcode = Object.keys(shortcodes).find((key) => key.toLowerCase() === shortcodeKey);
+	const shortcode = shortcodesByCode.get(code.toLowerCase());
 
-	if (matchingShortcode) {
+	if (shortcode) {
 		if (isSnap) {
-			const baseUrl = shortcodes[matchingShortcode].base || getBaseUrl(shortcodes[matchingShortcode].url);
+			const baseUrl = shortcode.base || getBaseUrl(shortcode.url);
 			if (baseUrl) {
 				return {
 					type: "snap",
@@ -198,7 +199,7 @@ function processCode(code, isSnap) {
 		} else {
 			return {
 				type: "bang",
-				result: "https://" + shortcodes[matchingShortcode].url,
+				result: "https://" + shortcode.url,
 			};
 		}
 	}
@@ -208,70 +209,48 @@ function processCode(code, isSnap) {
 function performSearch(query, defaultEngine) {
 	let searchUrl = defaultEngine;
 	let sitePrefix = "";
-	let processedQuery = query;
 
-	const tokens = query.split(" ");
 	const processedTokens = [];
-	let bangFound = false;
-	let snapFound = false;
 
-	for (let i = 0; i < tokens.length; i++) {
-		const token = tokens[i];
+	for (const token of query.split(" ")) {
 		if (token.startsWith("!")) {
-			const bangCode = token.slice(1);
-			const result = processCode(bangCode, false, defaultEngine);
+			const result = processCode(token.slice(1), false);
 
-			if (result && result.type === "bang") {
+			if (result) {
 				searchUrl = result.result;
-				bangFound = true;
-			} else {
-				processedTokens.push(token);
+				continue;
 			}
-		} else {
-			processedTokens.push(token);
-		}
-	}
+		} else if (token.startsWith("@")) {
+			const result = processCode(token.slice(1), true);
 
-	const finalTokens = [];
-	for (let i = 0; i < processedTokens.length; i++) {
-		const token = processedTokens[i];
-		if (token.startsWith("@")) {
-			const snapCode = token.slice(1);
-			const result = processCode(snapCode, true, defaultEngine);
-
-			if (result && result.type === "snap") {
+			if (result) {
 				sitePrefix = result.result;
-				snapFound = true;
-			} else {
-				finalTokens.push(token);
+				continue;
 			}
-		} else {
-			finalTokens.push(token);
 		}
+
+		processedTokens.push(token);
 	}
 
-	processedQuery = finalTokens.join(" ");
+	let processedQuery = processedTokens.join(" ");
 
 	if (!processedQuery.trim()) {
-		const shortcodeKey = Object.keys(shortcodes).find((key) => "https://" + shortcodes[key].url === searchUrl);
+		const shortcode = shortcodesByUrl.get(searchUrl);
 
-		if (shortcodeKey) {
-			if (shortcodes[shortcodeKey].base) {
-				window.location.href = "https://" + shortcodes[shortcodeKey].base;
-			} else {
-				window.location.href = searchUrl.split("/").slice(0, 3).join("/");
-			}
+		if (shortcode) {
+			const target = shortcode.base ? `https://${shortcode.base}` : searchUrl.split("/").slice(0, 3).join("/");
+			window.location.replace(target);
 		} else {
-			window.location.href = searchUrl;
+			window.location.replace(searchUrl);
 		}
 		return;
 	}
 
-	if (snapFound) {
+	if (sitePrefix) {
 		processedQuery = sitePrefix + processedQuery;
 	}
 
-	window.location.href = `${searchUrl}${encodeURIComponent(processedQuery)}`;
+	window.location.replace(`${searchUrl}${encodeURIComponent(processedQuery)}`);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -279,7 +258,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		searchForm = document.getElementById("search-form"),
 		searchInput = document.getElementById("search-input"),
 		engineSelect = document.getElementById("engine-select"),
-		shortcodeList = document.getElementById("shortcode-list");
+		shortcodeList = document.getElementById("shortcode-list"),
+		shortcodePopover = document.getElementById("shortcode-popover");
 
 	function createShortcodeList() {
 		const fragment = document.createDocumentFragment();
@@ -308,6 +288,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	function setupEventListeners() {
 		engineSelect.addEventListener("change", saveSelectedEngine);
 
+		shortcodePopover.addEventListener(
+			"beforetoggle",
+			(e) => {
+				if (e.newState === "open") {
+					createShortcodeList();
+				}
+			},
+			{ once: true },
+		);
+
 		searchForm.addEventListener("submit", (e) => {
 			e.preventDefault();
 			const query = searchInput.value.trim();
@@ -325,15 +315,21 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function init() {
-		scriptEnabled.style.display = "flex";
-		createShortcodeList();
-		loadSelectedEngine();
-		setupEventListeners();
-
 		const searchQuery = getUrlParameter("q");
+
+		if (window.__searchRouterRedirected) {
+			return;
+		}
+
+		loadSelectedEngine();
+
 		if (searchQuery) {
 			performSearch(searchQuery, engineSelect.value);
+			return;
 		}
+
+		scriptEnabled.style.display = "flex";
+		setupEventListeners();
 	}
 
 	init();
