@@ -168,6 +168,7 @@ const shortcodes = {
 	iseas: { url: "indieseas.net/search?q=", desc: "IndieSeas" },
 	sci: { url: "scira.ai/?q=", desc: "Scira" },
 	glg: { url: "gloogle.tiago.zip/?q=", desc: "Gloogle" },
+	sof: { url: "search.sofya.co/?q=", desc: "Sofya Search" },
 };
 
 let shortcodesByCode = null;
